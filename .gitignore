@@ -4,9 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-.env/
-*.json
-*.lock
+.env
 
 # testing
 /coverage
