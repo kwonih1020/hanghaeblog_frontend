@@ -6,6 +6,8 @@
 .pnp.js
 .env
 /server
+*.json
+*.lock
 
 # testing
 /coverage
