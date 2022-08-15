@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const ContentAddForm = () => {
   const dispatch = useDispatch();
@@ -47,60 +48,94 @@ const ContentAddForm = () => {
   
   
   return (
-    <div>
-      <form onSubmit={onSubmitHandler}>
+    <StContentAddBox> ContentAddForm
+      <form>
         <div>
-          <label />
-          가나다
-          <input
+          <StContentAddFormInput
             name="imageUrl"
             onChange={onChangeHandler}
-            placeholder="주소"
+            placeholder="url 주소를 입력해 주세요."
             value={content.imageUrl}
-          ></input>
+          ></StContentAddFormInput>
         </div>
 
         <div>
-          <label />
-          가나다
-          <input
+          <StContentAddFormInput
             name="title"
             onChange={onChangeHandler}
-            placeholder="제목"
+            placeholder="제목을 입력해 주세요."
             value={content.title}
-          ></input>
+          ></StContentAddFormInput>
         </div>
 
         <div>
-          <label />
-          가나다
-          <input
+          <StContentAddFormInput3
             name="text"
             onChange={onChangeHandler}
-            placeholder="내용"
+            placeholder="내용을 입력해 주세요."
             value={content.text}
-          ></input>
+          ></StContentAddFormInput3>
         </div>
 
-        <div>
-          <button>저장하기</button>
-          
-        </div>
+        <StContentAddButtons>
+          <StContentAddFormButton onClick={onSubmitHandler}>저장하기</StContentAddFormButton>
+          <StContentAddFormButton onClick={() => navigate("/")}>취소</StContentAddFormButton>
+        </StContentAddButtons>
       </form>
-      <button onClick={() => navigate("/")}>취소</button>
-    </div>
+      
+    </StContentAddBox>
   );
 };
 
 export default ContentAddForm;
 
 
-// onClick={() => navigate("/")}
 
-// const StAddFormBoxInputs = styled.input`
-//   width: 100px;
-//   height: 50px;
-//   border-radius: 14px;
-/* margin: auto;
-  display: flex; */
-// `
+const StContentAddBox = styled.div`
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  /* border: 1px solid rgb(2, 19, 19); */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  `
+
+const StContentAddFormInput = styled.input`
+width: 450px;
+height: 90px;
+border-radius: 10px;
+margin: auto auto 5px auto ;
+border: 2px solid rgb(2, 19, 19);
+
+`
+const StContentAddFormInput3 = styled.input`
+width: 450px;
+height: 250px;
+margin: auto;
+border-radius: 10px;
+border: 2px solid rgb(2, 19, 19);
+`
+
+const StContentAddFormButton = styled.button`
+width: 200px;
+height: 50px;
+border-radius: 10px;
+border: 2px solid rgb(2, 19, 19);
+cursor: pointer;
+`
+const StContentAddButtons = styled.div`
+width: 458px;
+height: 50px;
+border-radius: 10px;
+/* border: 2px solid rgb(2, 19, 19); */
+display: flex;
+/* justify-content: center; */
+align-content: center;
+align-items: center;
+justify-content: space-between;
+margin: 20px auto;
+`
