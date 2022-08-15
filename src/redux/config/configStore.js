@@ -2,19 +2,22 @@
 
 import logger from "redux-logger";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import comment from "../modules/commentSlice";
-import content from "../modules/contentSlice";
-import userSlice from "../modules/userSlice";
+import commentSlice from "../modules/commentSlice";
+import contentSlice from "../modules/contentSlice";
+import authSlice from "../modules/authSlice";
+import messageReducer from "../modules/messageSlice";
 
 const reducer = combineReducers({
-  comment,
-  content,
-  userSlice,
+  commentSlice,
+  contentSlice,
+  message: messageReducer,
+  auth: authSlice,
 });
 
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  devTools: true,
 });
 
 export default store;
