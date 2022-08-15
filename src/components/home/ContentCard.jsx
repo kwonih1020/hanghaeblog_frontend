@@ -1,5 +1,5 @@
 // import React from "react";
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getContent } from "../../redux/modules/contentSlice"
 import styled from "styled-components";
@@ -12,7 +12,7 @@ const ContentCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const content = useSelector((state) => state.content.list);
-  console.log(content)
+  // console.log(content)
   
   // console.log(content);
 

@@ -25,10 +25,14 @@ export default FormPage;
 
 
 const StAddFormBox = styled.div`
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   border: 4px solid rgb(2, 19, 19);
   border-radius: 12px;
   margin: auto;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 `
