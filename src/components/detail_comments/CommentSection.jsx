@@ -24,4 +24,8 @@ const StcommentSectionbox = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  /* justify-content: space-around; */
   `
