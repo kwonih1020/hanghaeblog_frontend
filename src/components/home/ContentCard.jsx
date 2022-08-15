@@ -12,6 +12,8 @@ const ContentCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const content = useSelector((state) => state.content.list);
+  
+  console.log(content)
   // console.log(content)
   
   // console.log(content);
