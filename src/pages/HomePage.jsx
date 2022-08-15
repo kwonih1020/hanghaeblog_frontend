@@ -7,7 +7,6 @@ import GlobalHeadder from "../global/GlobalHeader";
 import ContentListContainer from "../components/home/ContentListContainer";
 import ContentCard from "../components/home/ContentCard";
 
-
 const HomePage = () => {
   // const dispatch = useDispatch();
   // const content = useSelector((state) => state.content);
@@ -20,13 +19,12 @@ const HomePage = () => {
 
   return (
     <div>
-      
       <GlobalLayout>
-      <ContentListContainer>
-      <ContentCard/>
-      </ContentListContainer>
+        <ContentListContainer>
+          <ContentCard />
+        </ContentListContainer>
       </GlobalLayout>
-      </div>
+    </div>
   );
 };
 

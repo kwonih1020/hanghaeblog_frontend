@@ -4,25 +4,18 @@ import ContentAddForm from "../components/form/ContentAddForm";
 import styled from "styled-components";
 
 const FormPage = () => {
-  return <GlobalLayout> Form 페이지 입니다.
-
-    <StAddFormBox>
-
-
-      <ContentAddForm/>
-      
-    </StAddFormBox>
-    
-
-
-
-
-
-  </GlobalLayout>;
+  return (
+    <GlobalLayout>
+      {" "}
+      Form 페이지 입니다.
+      <StAddFormBox>
+        <ContentAddForm />
+      </StAddFormBox>
+    </GlobalLayout>
+  );
 };
 
 export default FormPage;
-
 
 const StAddFormBox = styled.div`
   width: 700px;
@@ -35,4 +28,4 @@ const StAddFormBox = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: center;
-`
+`;
