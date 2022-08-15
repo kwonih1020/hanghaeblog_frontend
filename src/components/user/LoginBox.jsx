@@ -29,7 +29,7 @@ const LoginBox = (props) => {
     dispatch(__login({ loginId, password }))
       .unwrap()
       .then(() => {
-        props.history.push("/login");
+        props.history.push("/");
         window.location.reload();
       })
       .catch(() => {
@@ -37,7 +37,7 @@ const LoginBox = (props) => {
       });
   };
   if (isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   return (
     <LoginBoxContainer className="col-md-12 login-form">
