@@ -6,6 +6,9 @@ import { postContent } from "../../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+
+
+
 const ContentAddForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,10 +46,11 @@ const ContentAddForm = () => {
     }
     dispatch(postContent(content));
     navigate("/")
+
     
   };
   
-  
+  console.log(content)
   return (
     <StContentAddBox> ContentAddForm
       <form>
