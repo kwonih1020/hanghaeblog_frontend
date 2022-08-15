@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { __signup } from "../../redux/modules/authSlice";
 import { clearMessage } from "../../redux/modules/messageSlice";
+import styled from "styled-components";
 
 const SignUpBox = () => {
   const [successful, setSuccessful] = useState(false);
@@ -61,64 +62,57 @@ const SignUpBox = () => {
 
   return (
     <div className="col-md-12 signup-form">
-      <div className="card card-container">
-        {/* <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        /> */}
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleRegister}>
-          <Form>
-            {!successful && (
-              <div>
-                <div className="form-group">
-                  <label htmlFor="아이디">아이디</label>
-                  <Field name="loginId" type="text" className="form-control" />
-                  <ErrorMessage
-                    name="loginId"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">비밀번호</label>
-                  <Field
-                    name="password"
-                    type="password"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="passwordConfirm">비밀번호 확인</label>
-                  <Field
-                    name="passwordConfirm"
-                    type="password"
-                    className="form-control"
-                  />
-                  <ErrorMessage
-                    name="passwordConfirm"
-                    component="div"
-                    className="alert alert-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <button type="submit" className="btn btn-primary btn-block">
-                    회원가입
-                  </button>
-                </div>
-              </div>
-            )}
-          </Form>
-        </Formik>
-      </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleRegister}>
+        <Form>
+          {!successful && (
+            <div>
+              <SignupInput className="form-group">
+                <label htmlFor="아이디">아이디</label>
+                <Field name="loginId" type="text" className="form-control" />
+                <ErrorMessage
+                  name="loginId"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </SignupInput>
+              <SignupInput className="form-group">
+                <label htmlFor="password">비밀번호</label>
+                <Field
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </SignupInput>
+              <SignupInput className="form-group">
+                <label htmlFor="passwordConfirm">비밀번호 확인</label>
+                <Field
+                  name="passwordConfirm"
+                  type="password"
+                  className="form-control"
+                />
+                <ErrorMessage
+                  name="passwordConfirm"
+                  component="div"
+                  className="alert alert-danger"
+                />
+              </SignupInput>
+              <SignupBoxButton className="form-group">
+                <button type="submit" className="btn btn-primary btn-block">
+                  회원가입
+                </button>
+              </SignupBoxButton>
+            </div>
+          )}
+        </Form>
+      </Formik>
       {message && (
         <div className="form-group">
           <div
@@ -133,5 +127,13 @@ const SignUpBox = () => {
     </div>
   );
 };
+
+const SignupInput = styled.div`
+  margin-top: 20px;
+`;
+const SignupBoxButton = styled.div`
+  text-align: center;
+  margin-top: 20px;
+`;
 
 export default SignUpBox;
