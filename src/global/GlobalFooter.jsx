@@ -20,7 +20,7 @@ const GlobalFooter = ({ children }) => {
           회원가입
         </Link>
       </FooterText>
-      <FooterText>
+      <FooterGroup>
         <br />
         <span>팀 : 6조 &nbsp;</span>
         <br />
@@ -29,7 +29,7 @@ const GlobalFooter = ({ children }) => {
         <br />
         <br />
         <span>Copyright 2022@All Rights Reserved.</span>
-      </FooterText>
+      </FooterGroup>
     </StGlobalFooter>
   );
 };
@@ -55,6 +55,14 @@ const FooterText = styled.div`
   display: flex;
   justify-content: space-around;
   width: 40%;
+  margin: 1rem 0 1rem 0;
+  color: white;
+`;
+
+const FooterGroup = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
   margin: 1rem 0 1rem 0;
   color: white;
 `;
