@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import GlobalLayout from "../global/GlobalLayout";
 import ContentListContainer from "../components/home/ContentListContainer";

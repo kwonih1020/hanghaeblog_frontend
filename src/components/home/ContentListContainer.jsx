@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import ContentCard from "./ContentCard";
 import styled from "styled-components";

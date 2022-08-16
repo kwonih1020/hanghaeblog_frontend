@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 

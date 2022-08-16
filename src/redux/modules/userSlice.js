@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./userActions";
 

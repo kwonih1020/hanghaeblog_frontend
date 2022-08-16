@@ -1,4 +1,5 @@
-// import React from "react";
+// eslint-disable-next-line
+
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getContent } from "../../redux/modules/contentSlice";

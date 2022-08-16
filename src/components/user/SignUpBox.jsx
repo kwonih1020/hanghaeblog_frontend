@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +8,6 @@ import { registerUser } from "../../redux/modules/userActions";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../elements/Button";
-import Input from "../../elements/Input";
 
 const SignUpBox = () => {
   const [customError] = useState(null);
