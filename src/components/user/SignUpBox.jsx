@@ -6,7 +6,7 @@ import { registerUser } from "../../redux/modules/userActions";
 import { useNavigate } from "react-router-dom";
 
 const SignUpBox = () => {
-  const [customError, setCustomError] = useState(null);
+  const [customError] = useState(null);
 
   const { loading, userInfo, error, success } = useSelector(
     (state) => state.user

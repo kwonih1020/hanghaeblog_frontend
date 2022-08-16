@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
+import Button from "../elements/Button";
 // import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
@@ -35,23 +36,32 @@ const GlobalHeadder = ({ children }) => {
       <LogoContainer>
         <NavLink to="/"></NavLink>
       </LogoContainer>
-      <header>
-        <div className="header-status">
-          <span>{userInfo ? `로그인중` : "로그인하세요!"}</span>
-          <div className="cta">
-            {userInfo ? (
-              <button className="button" onClick={() => dispatch(logout())}>
-                Logout
-              </button>
-            ) : (
-              <NavHeaderUser>
-                <NavLink to="/login">Login /</NavLink>
-                <NavLink to="/signup"> &nbsp;Register</NavLink>
-              </NavHeaderUser>
-            )}
-          </div>
+      <LoginContainer>
+        <div>{userInfo ? `로그인중` : "로그인하세요!"}</div>
+        <div className="cta">
+          {userInfo ? (
+            <Button
+              className="button"
+              onClick={() => dispatch(logout())}
+              size="medium">
+              로그아웃
+            </Button>
+          ) : (
+            <NavHeaderUser>
+              <NavLink
+                to="/login"
+                style={{ textDecoration: "none", color: "black" }}>
+                Login /
+              </NavLink>
+              <NavLink
+                to="/signup"
+                style={{ textDecoration: "none", color: "black" }}>
+                &nbsp;Register
+              </NavLink>
+            </NavHeaderUser>
+          )}
         </div>
-      </header>
+      </LoginContainer>
     </StGlobalHeader>
   );
 };
@@ -85,4 +95,8 @@ const LogoContainer = styled.div`
 
 const NavHeaderUser = styled.div`
   display: flex;
+`;
+
+const LoginContainer = styled.div`
+  display: block;
 `;
