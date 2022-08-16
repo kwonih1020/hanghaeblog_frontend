@@ -30,6 +30,9 @@ const userSlice = createSlice({
       state.is_Login = false;
       // console.log(typeof userInfo);
     },
+    loader: (state, action) => {
+      state.userInfo = action.payload;
+    },
   },
   extraReducers: {
     // login user
@@ -66,6 +69,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, loader } = userSlice.actions;
 
 export default userSlice.reducer;

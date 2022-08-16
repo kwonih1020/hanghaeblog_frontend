@@ -8,27 +8,9 @@ import Button from "../elements/Button";
 
 const GlobalHeadder = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
-  // const { is_Login } = useSelector((state) => state.user);
+  console.log(userInfo);
 
   const dispatch = useDispatch();
-
-  // const getStorage = localStorage.getItem("userToken");
-
-  // const config = {
-  //   headers: {
-  //     authorization: getStorage,
-  //   },
-  // };
-
-  // const confirmToken = () =>
-  //   axios.post("http://43.200.1.214:8080/api/member", config);
-
-  // console.log(confirmToken);
-  // useEffect(() => {
-  //   dispatch(confirmToken);
-  // }, [dispatch]);
-
-  // console.log(userInfo);
 
   return (
     <StGlobalHeader>
