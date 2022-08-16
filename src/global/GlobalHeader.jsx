@@ -51,12 +51,12 @@ const GlobalHeadder = ({ children }) => {
               <NavLink
                 to="/login"
                 style={{ textDecoration: "none", color: "black" }}>
-                Login /
+                로그인 /
               </NavLink>
               <NavLink
                 to="/signup"
                 style={{ textDecoration: "none", color: "black" }}>
-                &nbsp;Register
+                &nbsp;회원가입
               </NavLink>
             </NavHeaderUser>
           )}
@@ -80,7 +80,7 @@ const StGlobalHeader = styled.div`
   justify-content: space-between;
   border-bottom: 1px solid black;
   margin: auto;
-  padding: 10px;
+  padding: 20px;
 `;
 
 const LogoContainer = styled.div`

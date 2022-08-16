@@ -26,6 +26,7 @@ export const registerUser = createAsyncThunk(
       // } else {
       //   return rejectWithValue(error.message);
       // }
+      return error.message;
     }
   }
 );
@@ -51,7 +52,7 @@ export const userLogin = createAsyncThunk(
       localStorage.setItem("userToken", response.headers.authorization);
       console.log(response);
       // return res;
-      return response;
+      return response.data;
     } catch (error) {
       // return custom error message from API if any
       // if (error.response && error.response.data.message) {
@@ -59,6 +60,7 @@ export const userLogin = createAsyncThunk(
       // } else {
       //   return rejectWithValue(error.message);
       // }
+      return error.message;
     }
   }
 );
