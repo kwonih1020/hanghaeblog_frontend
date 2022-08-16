@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./userActions";
 
-// const navigate = Navigate();
-
 // initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
@@ -23,11 +21,12 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       localStorage.removeItem("userToken"); // deletes token from storage
+      localStorage.removeItem("loginId");
       state.loading = false;
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
-      state.is_Login = false;
+
       // console.log(typeof userInfo);
     },
     loader: (state, action) => {
@@ -44,13 +43,11 @@ const userSlice = createSlice({
       state.loading = false;
       state.userInfo = payload;
       state.userToken = payload.userToken;
-      state.is_Login = true;
       // console.log(payload);
     },
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
-      state.is_Login = false;
       // console.log(payload);
     },
     // register user

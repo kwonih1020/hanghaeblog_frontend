@@ -4,11 +4,12 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
 import Button from "../elements/Button";
-// import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
-  console.log(userInfo);
+  // console.log(userInfo);
+
+  const loginId = localStorage.getItem("loginId");
 
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ const GlobalHeadder = ({ children }) => {
         <NavLink to="/"></NavLink>
       </LogoContainer>
       <LoginContainer>
-        <div>{userInfo ? `로그인중` : "로그인하세요!"}</div>
+        <div>{userInfo ? `${loginId}님께서 로그인중` : "로그인하세요!"}</div>
         <div className="cta">
           {userInfo ? (
             <Button
