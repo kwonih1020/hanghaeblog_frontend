@@ -72,7 +72,7 @@ const LoginBoxContainer = styled.div`
   display: block;
   width: 400px;
   margin: 20px auto;
-  border: 1px solid black;
+  border: 1px solid #eee;
   padding: 20px;
 `;
 const LoginInputGroup = styled.div`
