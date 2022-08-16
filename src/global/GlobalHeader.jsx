@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
-import axios from "axios";
+// import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -32,20 +32,22 @@ const GlobalHeadder = ({ children }) => {
   return (
     <StGlobalHeader>
       {children}
-      <div>여긴 로고</div>
+      <LogoContainer>
+        <NavLink to="/"></NavLink>
+      </LogoContainer>
       <header>
         <div className="header-status">
-          <span>{userInfo ? `Logged in` : "You're not logged in"}</span>
+          <span>{userInfo ? `로그인중` : "로그인하세요!"}</span>
           <div className="cta">
             {userInfo ? (
               <button className="button" onClick={() => dispatch(logout())}>
                 Logout
               </button>
             ) : (
-              <nav className="container navigation">
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/signup">Register</NavLink>
-              </nav>
+              <NavHeaderUser>
+                <NavLink to="/login">Login /</NavLink>
+                <NavLink to="/signup"> &nbsp;Register</NavLink>
+              </NavHeaderUser>
             )}
           </div>
         </div>
@@ -61,17 +63,26 @@ const StGlobalHeader = styled.div`
   height: 100px;
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
-
   display: flex;
   flex-direction: row;
   align-content: center;
   align-items: center;
   justify-content: space-between;
-  border-style: solid;
-  border-width: 3px;
+  border-bottom: 1px solid black;
   margin: auto;
+  padding: 10px;
 `;
 
-// const NavHeaderUser = styled.div`
-//   display: flex;
-// `;
+const LogoContainer = styled.div`
+  background-image: url(/logo.png);
+  background-size: cover;
+  background-position: center;
+  width: 109px;
+  padding: 17.5px 0;
+  cursor: pointer;
+  margin: 0;
+`;
+
+const NavHeaderUser = styled.div`
+  display: flex;
+`;

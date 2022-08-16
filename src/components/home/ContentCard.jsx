@@ -11,9 +11,6 @@ const ContentCard = () => {
   const content = useSelector((state) => state.content.list);
 
   console.log(content);
-  // console.log(content)
-
-  // console.log(content);
 
   useEffect(() => {
     dispatch(getContent());
@@ -23,7 +20,9 @@ const ContentCard = () => {
     <StContentBoxs>
       <StContentContainer onClick={() => navigate("/add")}>
         <h1>(●'◡'●)</h1>
-        <h2>+</h2>
+        <h1>
+          <strong>+</strong>
+        </h1>
       </StContentContainer>
 
       {content.map((content, index) => {
@@ -47,7 +46,7 @@ const StContentContainer = styled.div`
   width: 150px;
   height: 150px;
   margin: 10px;
-  border: 4px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
   border-radius: 12px;
   padding: 12px 24px 24px 24px;
   cursor: pointer;
@@ -60,7 +59,7 @@ const StContentContainer = styled.div`
 
 const StContentBoxs = styled.div`
   display: flex;
-  flex-wrap: nowrap
+  flex-wrap: nowrap;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
