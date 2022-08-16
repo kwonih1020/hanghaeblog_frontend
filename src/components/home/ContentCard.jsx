@@ -1,66 +1,47 @@
 // import React from "react";
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getContent } from "../../redux/modules/contentSlice"
+import { getContent } from "../../redux/modules/contentSlice";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-
 
 const ContentCard = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const content = useSelector((state) => state.content.list);
-  
-  console.log(content)
+
+  console.log(content);
   // console.log(content)
-  
+
   // console.log(content);
 
   useEffect(() => {
     dispatch(getContent());
   }, [dispatch]);
 
-
-
-
-
   return (
- 
     <StContentBoxs>
       <StContentContainer onClick={() => navigate("/add")}>
         <h1>(●'◡'●)</h1>
         <h2>+</h2>
       </StContentContainer>
 
-
-
-      {content.map((content,index) =>{
-        return(
+      {content.map((content, index) => {
+        return (
           <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
-          <StContentContainer> 
+            <StContentContainer>
               {/* <div>{content.imageUrl}</div> */}
               <h1>{content.title}</h1>
               <h2>{content.text}</h2>
-          </StContentContainer>
-        </div>
-        )
+            </StContentContainer>
+          </div>
+        );
       })}
-
-    
-</StContentBoxs>
-
-      
-
-
-
-
-  )
+    </StContentBoxs>
+  );
 };
 
 export default ContentCard;
-
 
 const StContentContainer = styled.div`
   width: 150px;
@@ -75,7 +56,7 @@ const StContentContainer = styled.div`
   align-items: center;
   align-content: center;
   color: black;
-`
+`;
 
 const StContentBoxs = styled.div`
   display: flex;
@@ -85,4 +66,4 @@ const StContentBoxs = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-`
+`;

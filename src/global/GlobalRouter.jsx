@@ -5,7 +5,6 @@ import FormPage from "../pages/FormPage";
 import DetailPage from "../pages/DetailPage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
-// import ProfilePage from "../pages/ProfilePage";
 
 const GlobalRouter = () => {
   return (
@@ -16,7 +15,6 @@ const GlobalRouter = () => {
         <Route path="/add" element={<FormPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        {/* <Route path="/profile" element={<ProfilePage />} /> */}
       </Routes>
     </>
   );

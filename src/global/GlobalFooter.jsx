@@ -12,7 +12,7 @@ const StGlobalFooter = styled.div`
   height: 100px;
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
-  
+
   display: flex;
   flex-direction: column;
   align-content: center;

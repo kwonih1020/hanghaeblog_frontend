@@ -1,62 +1,55 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import { __logout } from "../redux/modules/authSlice";
+import { logout } from "../redux/modules/userSlice";
+import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
-  const { user: currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
+  const { userInfo } = useSelector((state) => state.user);
+  // const { is_Login } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  const logOut = useCallback(() => {
-    dispatch(__logout());
-  }, [dispatch]);
+  // const getStorage = localStorage.getItem("userToken");
 
+  // const config = {
+  //   headers: {
+  //     authorization: getStorage,
+  //   },
+  // };
+
+  // const confirmToken = () =>
+  //   axios.post("http://43.200.1.214:8080/api/member", config);
+
+  // console.log(confirmToken);
   // useEffect(() => {
-  //   // if (currentUser) {
-  //   //   setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-  //   //   setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-  //   // } else {
-  //   //   setShowModeratorBoard(false);
-  //   //   setShowAdminBoard(false);
-  //   // }
-  //   EventBus.on("logout", () => {
-  //     logOut();
-  //   });
-  //   return () => {
-  //     EventBus.remove("logout");
-  //   };
-  // }, [currentUser, logOut]);
+  //   dispatch(confirmToken);
+  // }, [dispatch]);
+
+  // console.log(userInfo);
 
   return (
     <StGlobalHeader>
       {children}
       <div>여긴 로고</div>
-      <div>
-        {currentUser ? (
-          <div>
-            <NavHeaderUser>
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.loginId}
-              </Link>
-              <a href="/login" className="nav-link" onClick={logOut}>
-                로그아웃
-              </a>
-            </NavHeaderUser>
+      <header>
+        <div className="header-status">
+          <span>{userInfo ? `Logged in` : "You're not logged in"}</span>
+          <div className="cta">
+            {userInfo ? (
+              <button className="button" onClick={() => dispatch(logout())}>
+                Logout
+              </button>
+            ) : (
+              <nav className="container navigation">
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/signup">Register</NavLink>
+              </nav>
+            )}
           </div>
-        ) : (
-          <NavHeaderUser>
-            <Link to={"/login"} className="nav-link">
-              로그인 &nbsp;/
-            </Link>
-            <Link to={"/signup"} className="nav-link">
-              &nbsp; 회원가입
-            </Link>
-          </NavHeaderUser>
-        )}
-      </div>
+        </div>
+      </header>
     </StGlobalHeader>
   );
 };
@@ -79,6 +72,6 @@ const StGlobalHeader = styled.div`
   margin: auto;
 `;
 
-const NavHeaderUser = styled.div`
-  display: flex;
-`;
+// const NavHeaderUser = styled.div`
+//   display: flex;
+// `;

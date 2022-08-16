@@ -4,20 +4,14 @@ import styled from "styled-components";
 
 const ContentListContainer = () => {
   return (
-    <StListWrapper>ContentListContainer
-
-
-      <ContentCard/>
-
-
-
+    <StListWrapper>
+      ContentListContainer
+      <ContentCard />
     </StListWrapper>
-  )
+  );
 };
 
 export default ContentListContainer;
-
-
 
 const StListWrapper = styled.div`
   display: flex;
@@ -29,5 +23,5 @@ const StListWrapper = styled.div`
   margin: auto;
   width: 700px;
   height: 700px;
-  padding: 24px; 
-`
+  padding: 24px;
+`;

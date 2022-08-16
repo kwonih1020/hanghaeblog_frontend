@@ -4,17 +4,16 @@ import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
 const CommentSection = () => {
-  return <StcommentSectionbox>CommentSection
-
-    <CommentList/>
-    <CommentForm/>
-
-  </StcommentSectionbox>;
+  return (
+    <StcommentSectionbox>
+      CommentSection
+      <CommentList />
+      <CommentForm />
+    </StcommentSectionbox>
+  );
 };
 
 export default CommentSection;
-
-
 
 const StcommentSectionbox = styled.div`
   width: 500px;
@@ -28,4 +27,4 @@ const StcommentSectionbox = styled.div`
   align-content: center;
   align-items: center;
   /* justify-content: space-around; */
-  `
+`;
