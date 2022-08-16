@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/modules/userSlice";
 import Button from "../elements/Button";
@@ -18,9 +18,10 @@ const GlobalHeadder = ({ children }) => {
   return (
     <StGlobalHeader>
       {children}
-      <LogoContainer>
-        <NavLink to="/"></NavLink>
-      </LogoContainer>
+      <Link to="/">
+        <LogoContainer></LogoContainer>
+      </Link>
+
       <LoginContainer>
         <div>{userInfo ? `${loginId}님께서 로그인중` : "로그인하세요!"}</div>
         <div className="cta">
@@ -33,16 +34,16 @@ const GlobalHeadder = ({ children }) => {
             </Button>
           ) : (
             <NavHeaderUser>
-              <NavLink
+              <Link
                 to="/login"
                 style={{ textDecoration: "none", color: "black" }}>
                 로그인 /
-              </NavLink>
-              <NavLink
+              </Link>
+              <Link
                 to="/signup"
                 style={{ textDecoration: "none", color: "black" }}>
                 &nbsp;회원가입
-              </NavLink>
+              </Link>
             </NavHeaderUser>
           )}
         </div>
