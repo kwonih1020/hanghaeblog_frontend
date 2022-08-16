@@ -3,6 +3,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// const loginServer = process.env.EC2_API_URL_LOGIN;
+
 export const registerUser = createAsyncThunk(
   // action type string
   "user/register",
@@ -24,6 +26,7 @@ export const registerUser = createAsyncThunk(
       window.alert("회원가입 성공");
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
+      window.alert("회원가입 실패!");
       return thunkAPI.rejectWithValue();
     }
   }

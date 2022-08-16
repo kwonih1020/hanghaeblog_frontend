@@ -8,6 +8,7 @@ import { userLogin } from "../../redux/modules/userActions";
 import Error from "./Error";
 import { useNavigate } from "react-router-dom";
 import Button from "../../elements/Button";
+import Kakao from "./Kakao";
 
 const LoginBox = () => {
   const { loading, userInfo, error } = useSelector((state) => state.user);
@@ -58,13 +59,14 @@ const LoginBox = () => {
           />
         </LoginInputGroup>
         <Button
-          style={{ textAlign: "center", margin: "0 auto" }}
+          style={{ textAlign: "center", margin: "0 auto", width: "284px" }}
           type="submit"
           className="button"
           disabled={loading}
           size="medium">
           로그인
         </Button>
+        <Kakao />
       </form>
     </LoginBoxContainer>
   );
@@ -111,9 +113,5 @@ const LoginInput = styled.input`
     outline: none;
   }
 `;
-// const LoginBoxButton = styled.div`
-//   text-align: center;
-//   margin-top: 20px;
-// `;
 
 export default LoginBox;
