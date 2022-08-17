@@ -1,11 +1,15 @@
 // // eslint-disable-next-line
 
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, userLogin } from "./userActions";
+import { registerUser, userLogin, logoutUser } from "./userActions";
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
+  : null;
+
+const refreshToken = localStorage.getItem("refreshToken")
+  ? localStorage.getItem("refreshToken")
   : null;
 
 const initialState = {
@@ -15,6 +19,8 @@ const initialState = {
   error: null,
   success: false, // for monitoring the registration process.
   is_Login: false,
+  refreshToken,
+  // refreshToken,
 };
 
 const userSlice = createSlice({
@@ -24,6 +30,7 @@ const userSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem("userToken"); // deletes token from storage
       localStorage.removeItem("loginId");
+      localStorage.removeItem("refreshToken");
       state.loading = false;
       state.userInfo = null;
       state.userToken = null;
@@ -64,6 +71,20 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = payload;
     },
+    // logout user
+    // [logoutUser.pending]: (state) => {
+    //   state.loading = true;
+    //   state.error = null;
+    // },
+    // [registerUser.fulfilled]: (state, { payload }) => {
+    //   state.loading = false;
+    //   state.success = true; // logout successful
+    //   state.refreshToken = payload.refreshToken;
+    // },
+    // [registerUser.rejected]: (state, { payload }) => {
+    //   state.loading = false;
+    //   state.error = payload;
+    // },
   },
 });
 

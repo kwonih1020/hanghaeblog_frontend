@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 const ContentCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const content = useSelector((state) => state.content.list);
+  const contents = useSelector((state) => state.content.list);
+  console.log(contents);
 
   useEffect(() => {
     dispatch(getContent());
   }, [dispatch]);
-  console.log(content);
 
   return (
     <StContentBoxs>
@@ -24,17 +24,18 @@ const ContentCard = () => {
           <strong>+</strong>
         </h1>
       </StContentContainer>
-      {content.map((content, index) => {
-        return (
-          <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
-            <StContentContainer>
-              {/* <div>{content.imageUrl}</div> */}
-              <h3>{content.title}</h3>
-              <h4>{content.text}</h4>
-            </StContentContainer>
-          </div>
-        );
-      })}
+      {contents &&
+        contents.map((content, index) => {
+          return (
+            <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
+              <StContentContainer>
+                {/* <div>{content.imageUrl}</div> */}
+                <h3>{content.title}</h3>
+                <h4>{content.text}</h4>
+              </StContentContainer>
+            </div>
+          );
+        })}
     </StContentBoxs>
   );
 };
