@@ -3,6 +3,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const userToken = localStorage.getItem("userToken")
+  ? localStorage.getItem("userToken")
+  : null;
+
+const refreshToken = localStorage.getItem("refreshToken")
+  ? localStorage.getItem("refreshToken")
+  : null;
+
+let config = {
+  headers: {
+    authorization: userToken,
+    refreshtoken: refreshToken,
+  },
+};
+
 const initialState = {
   list: [],
 };
@@ -23,7 +38,11 @@ export const postComment = createAsyncThunk(
   "comment/postComment",
   async (args, thunkAPI) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/comment", args);
+      const { data } = await axios.post(
+        "http://localhost:3001/comment",
+        args,
+        config
+      );
       console.log("여기까지오냐?");
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
@@ -47,7 +66,8 @@ export const commentSlice = createSlice({
     },
     [postComment.fulfilled]: (state, action) => {
       console.log("여기까지오냐?");
-      state.list.push(action.payload);
+      // state.list.push(action.payload);
+      state.list = [...state.list, action.payload];
       // console.log(state)
 
       // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
