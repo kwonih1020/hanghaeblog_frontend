@@ -19,7 +19,7 @@ let config = {
 };
 
 const initialState = {
-  list: [],
+  comments: [],
 };
 
 export const getComments = createAsyncThunk(
@@ -38,48 +38,123 @@ export const getComments = createAsyncThunk(
   }
 );
 
-export const postComment = createAsyncThunk(
+export const postComments = createAsyncThunk(
   "comment/postComment",
-  async (args, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      // const commentList = await axios.get("http://localhost:3001/content")
-      const { data } = await axios.post(
-        "http://43.200.1.214:8080/api/content",
-        args
+      console.log(payload);
+      const contentId = payload.contentId;
+      const commentText = payload.commentText;
+      const commentPost = await axios.post(
+        "http://43.200.1.214:8080/api/comment",
+        {
+          contentId: contentId,
+          commentText: commentText,
+        },
+        config
       );
-      console.log("여기까지오냐?");
-      return thunkAPI.fulfillWithValue(data);
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
+      console.log(commentPost);
+      return thunkAPI.fulfillWithValue(commentPost.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// console.log(getContent)
+export const deleteComment = createAsyncThunk(
+  "comment/deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      console.log(payload);
+      const delCommentRes = await axios.delete(
+        `http://43.200.1.214:8080/api/comment/${payload}`,
+        config
+      );
+      console.log(payload);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// export const patchComment = createAsyncThunk(
+//   "comment/patchComment",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const targetId = payload.id;
+//       const newDesc = payload.newDesc;
+//       const patchCommentRes = await axios.put(
+//         `http://43.200.1.214:8080/api/comment/${targetId}`,
+//         { commentText: newDesc },
+//         config
+//       );
+//       return thunkAPI.fulfillWithValue(patchCommentRes.data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const commentSlice = createSlice({
   name: "commentSlice",
   initialState,
   reducers: {},
   extraReducers: {
-    // [getContent.pending]: (state) => {
-    //   state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
+    // [patchComment.pending]: (state = initialState, action) => {
+    //   state.isLoading = true;
     // },
+    // [patchComment.fulfilled]: (state = initialState, action) => {
+    //   state.isLoading = false;
+    //   state.comments = action.payload;
+    // },
+    // [patchComment.rejected]: (state = initialState, action) => {
+    //   state.isLoading = false;
+    //   state.err = action.payload.comments;
+    // },
+    [getComments.pending]: (state, action) => {
+      state.isLoading = true;
+    },
     [getComments.fulfilled]: (state, action) => {
-      state.list = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      state.isLoading = false;
+      state.comments = action.payload.data.comments;
+      console.log(action.payload.data.comments);
     },
-    [postComment.fulfilled]: (state, action) => {
-      console.log("여기까지오냐?");
-      // state.list.push(action.payload);
-      state.list = [...state.list, action.payload];
-      // console.log(state)
-
-      // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+    [getComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.comments = [];
+      state.err = action.payload;
     },
-    // [getContent.rejected]: (state, action) => {
-    //   state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
-    //   state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
-    // },
+    [postComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [postComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      // state.comments.push(...action.payload);
+      console.log(state.comments);
+      console.log(action.payload);
+      state.comments = [...state.comments, action.payload];
+    },
+    [postComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [deleteComment.pending]: (state, action) => {
+      state.isLoading = true;
+      // state.status = 0;
+    },
+    [deleteComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      // state.status = action.payload;
+      console.log(action.payload);
+      state.comments = state.comments.filter(
+        (comment) => comment.id !== action.payload
+      );
+    },
+    [deleteComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload.comments;
+    },
   },
 });
 

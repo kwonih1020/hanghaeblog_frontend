@@ -36,6 +36,7 @@ export const getContent = createAsyncThunk(
     try {
       const { data } = await axios.get("http://43.200.1.214:8080/api/content");
       console.log(data);
+      // return thunkAPI.fulfillWithValue(data.data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -54,7 +55,7 @@ export const postContent = createAsyncThunk(
       );
       console.log(data);
       // console.log("여기까지오냐?");
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -132,6 +133,7 @@ export const contentSlice = createSlice({
       state.isLoading = true;
     },
     [getContent.fulfilled]: (state, action) => {
+      state.isLoading = false;
       state.list = action.payload;
       console.log(action.payload);
     },
@@ -144,8 +146,10 @@ export const contentSlice = createSlice({
     },
     [postContent.fulfilled]: (state, action) => {
       // console.log("여기까지오냐?");
-      // state.list.push(action.payload);
-      state.list = [...state.list.data, action.payload];
+      console.log(action.payload);
+      console.log(state.list);
+      state.list.push(action.payload);
+      // state.list = [...state.list, action.payload];
     },
     [postContent.rejected]: (state, action) => {
       state.isLoading = false;
@@ -180,7 +184,6 @@ export const contentSlice = createSlice({
     [getSingleContent.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.singleContent = action.payload;
-      // console.log("11");
     },
     [getSingleContent.rejected]: (state, action) => {
       state.isLoading = false;
