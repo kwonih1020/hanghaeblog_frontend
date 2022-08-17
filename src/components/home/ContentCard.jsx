@@ -1,70 +1,44 @@
-// import React from "react";
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getContent } from "../../redux/modules/contentSlice"
+import { getContent } from "../../redux/modules/contentSlice";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-
 
 const ContentCard = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const content = useSelector((state) => state.content.list);
-  
-  console.log(content)
-  // console.log(content)
-  
-  // console.log(content);
 
   useEffect(() => {
     dispatch(getContent());
   }, [dispatch]);
-
-
-
-
-
+  console.log(content);
   return (
- 
     <StContentBoxs>
       <StContentContainer onClick={() => navigate("/add")}>
-        <h1>(●'◡'●)</h1>
-        <h2>+</h2>
+        <h2>(●'◡'●)</h2>
+        <h1>+</h1>
       </StContentContainer>
-
-
-
-      {content.map((content,index) =>{
-        return(
+      {content.map((content, index) => {
+        return (
           <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
-          <StContentContainer> 
+            <StContentContainer>
               {/* <div>{content.imageUrl}</div> */}
-              <h1>{content.title}</h1>
-              <h2>{content.text}</h2>
-          </StContentContainer>
-        </div>
-        )
+              <h3>{content.title}</h3>
+              <h4>{content.text}</h4>
+            </StContentContainer>
+          </div>
+        );
       })}
-
-    
-</StContentBoxs>
-
-      
-
-
-
-
-  )
+    </StContentBoxs>
+  );
 };
 
 export default ContentCard;
 
-
 const StContentContainer = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   margin: 10px;
   border: 4px solid rgb(2, 19, 19);
   border-radius: 12px;
@@ -74,8 +48,9 @@ const StContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: center;
+  justify-content: center;
   color: black;
-`
+`;
 
 const StContentBoxs = styled.div`
   display: flex;
@@ -85,4 +60,4 @@ const StContentBoxs = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-`
+`;
