@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import ContentCard from "./ContentCard";
 import styled from "styled-components";
@@ -17,10 +19,12 @@ const StListWrapper = styled.div`
   flex-direction: column;
   align-content: center;
   align-items: center;
-  border-style: solid;
-  border-width: 3px;
   margin: auto;
-  width: 700px;
+  margin-top: 20px;
+  max-width: 60%;
+  min-width: 50%;
   height: 700px;
   padding: 24px;
+  padding-bottom: 200px;
+  overflow-y: scroll;
 `;

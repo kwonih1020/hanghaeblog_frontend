@@ -11,8 +11,9 @@ export default GlobalLayout;
 
 const StGlobalLayout = styled.div`
   width: 100%;
-  height: calc(100vh - 45px);
-  padding: 24px; 
+  min-height: 100vh;
+  padding: 24px;
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
+  position: relative;
 `;

@@ -1,5 +1,6 @@
-// src/redux/modules/contentSlice.js
+// eslint-disable-next-line
 
+// src/redux/modules/contentSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 

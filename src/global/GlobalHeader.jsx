@@ -1,62 +1,53 @@
-import React, { useState, useEffect, useCallback } from "react";
+// eslint-disable-next-line
+
+import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import { __logout } from "../redux/modules/authSlice";
+import { logout } from "../redux/modules/userSlice";
+import Button from "../elements/Button";
 
 const GlobalHeadder = ({ children }) => {
-  const { user: currentUser } = useSelector((state) => state.auth);
-  console.log(currentUser);
+  const { userInfo } = useSelector((state) => state.user);
+  // console.log(userInfo);
+
+  const loginId = localStorage.getItem("loginId");
 
   const dispatch = useDispatch();
-
-  const logOut = useCallback(() => {
-    dispatch(__logout());
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   // if (currentUser) {
-  //   //   setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-  //   //   setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-  //   // } else {
-  //   //   setShowModeratorBoard(false);
-  //   //   setShowAdminBoard(false);
-  //   // }
-  //   EventBus.on("logout", () => {
-  //     logOut();
-  //   });
-  //   return () => {
-  //     EventBus.remove("logout");
-  //   };
-  // }, [currentUser, logOut]);
 
   return (
     <StGlobalHeader>
       {children}
-      <div>여긴 로고</div>
-      <div>
-        {currentUser ? (
-          <div>
+      <Link to="/">
+        <LogoContainer></LogoContainer>
+      </Link>
+
+      <LoginContainer>
+        <div>{userInfo ? `${loginId}님께서 로그인중` : "로그인하세요!"}</div>
+        <div className="cta">
+          {userInfo ? (
+            <Button
+              className="button"
+              onClick={() => dispatch(logout())}
+              size="medium">
+              로그아웃
+            </Button>
+          ) : (
             <NavHeaderUser>
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.loginId}
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "black" }}>
+                로그인 /
               </Link>
-              <a href="/login" className="nav-link" onClick={logOut}>
-                로그아웃
-              </a>
+              <Link
+                to="/signup"
+                style={{ textDecoration: "none", color: "black" }}>
+                &nbsp;회원가입
+              </Link>
             </NavHeaderUser>
-          </div>
-        ) : (
-          <NavHeaderUser>
-            <Link to={"/login"} className="nav-link">
-              로그인 &nbsp;/
-            </Link>
-            <Link to={"/signup"} className="nav-link">
-              &nbsp; 회원가입
-            </Link>
-          </NavHeaderUser>
-        )}
-      </div>
+          )}
+        </div>
+      </LoginContainer>
     </StGlobalHeader>
   );
 };
@@ -68,17 +59,30 @@ const StGlobalHeader = styled.div`
   height: 100px;
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
-
   display: flex;
   flex-direction: row;
   align-content: center;
   align-items: center;
   justify-content: space-between;
-  border-style: solid;
-  border-width: 3px;
+  border-bottom: 1px solid black;
   margin: auto;
+  padding: 20px;
+`;
+
+const LogoContainer = styled.div`
+  background-image: url(/logo.png);
+  background-size: cover;
+  background-position: center;
+  width: 109px;
+  padding: 17.5px 0;
+  cursor: pointer;
+  margin: 0;
 `;
 
 const NavHeaderUser = styled.div`
   display: flex;
+`;
+
+const LoginContainer = styled.div`
+  display: block;
 `;

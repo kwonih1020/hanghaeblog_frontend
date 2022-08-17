@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 import GlobalLayout from "../global/GlobalLayout";
 import LoginBox from "../components/user/LoginBox";

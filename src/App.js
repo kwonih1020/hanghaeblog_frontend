@@ -1,25 +1,22 @@
 // eslint-disable-next-line
 
-// import logo from './logo.svg';
-
-import React, { useEffect } from "react";
+import React from "react";
 import GlobalRouter from "./global/GlobalRouter";
 import GlobalHeader from "./global/GlobalHeader";
 import GlobalFooter from "./global/GlobalFooter";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-// import { getCookie } from "./shared/cookie";
-// import { useDispatch } from "react-redux";
+import { loader } from "./redux/modules/userSlice";
+import { useDispatch } from "react-redux";
 
 const App = () => {
-  // const dispatch = useDispatch();
+  // 새고고침씨 userStorage에 토큰 추가
+  const dispatch = useDispatch();
+  const handleLoader = () => {
+    const userToken = localStorage.getItem("userToken");
+    dispatch(loader(userToken));
+  };
 
-  //useEffect로 쿠키에 토큰 있을시 로그인 체크
-  // useEffect(() => {
-  //   if (getCookie("is_login") !== undefined) {
-  //     dispatch(loginUser(true));
-  //   }
-  // });
+  window.addEventListener("load", handleLoader);
+
   return (
     <>
       <GlobalHeader />

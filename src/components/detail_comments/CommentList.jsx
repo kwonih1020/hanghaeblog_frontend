@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import { React, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +13,12 @@ const CommentList = () => {
   const param = parseInt(params.id);
   const contents = useSelector((state) => state.content.list);
   const currentContent = contents.filter((cur) => cur.id == param);
+  const comments = currentContent.map((abc) => abc.comments);
+
+  const contents = useSelector((state) => state.content.list);
+
+  const currentContent = contents.filter((cur) => cur.id == param);
+
   const comments = currentContent.map((abc) => abc.comments);
 
   // 수정 삭제용 콘솔
@@ -28,6 +36,10 @@ const CommentList = () => {
   const deleteHandler = () => {
     dispatch(deleteContent(comments[0].id));
   };
+
+  useEffect(() => {
+    dispatch(getContent());
+  }, [dispatch]);
 
   return (
     <StCommentList>

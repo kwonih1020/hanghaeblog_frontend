@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getContent } from "../../redux/modules/contentSlice";
@@ -13,11 +15,14 @@ const ContentCard = () => {
     dispatch(getContent());
   }, [dispatch]);
   console.log(content);
+
   return (
     <StContentBoxs>
       <StContentContainer onClick={() => navigate("/add")}>
-        <h2>(●'◡'●)</h2>
-        <h1>+</h1>
+        <h1>(●'◡'●)</h1>
+        <h1>
+          <strong>+</strong>
+        </h1>
       </StContentContainer>
       {content.map((content, index) => {
         return (
@@ -40,7 +45,7 @@ const StContentContainer = styled.div`
   width: 170px;
   height: 170px;
   margin: 10px;
-  border: 4px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
   border-radius: 12px;
   padding: 12px 24px 24px 24px;
   cursor: pointer;
@@ -54,7 +59,7 @@ const StContentContainer = styled.div`
 
 const StContentBoxs = styled.div`
   display: flex;
-  flex-wrap: nowrap
+  flex-wrap: nowrap;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;

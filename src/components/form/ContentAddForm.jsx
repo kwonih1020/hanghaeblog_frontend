@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React from "react";
 // import styled from "styled-components";
 import { useState } from "react";
@@ -47,8 +49,7 @@ const ContentAddForm = () => {
             name="imageUrl"
             onChange={onChangeHandler}
             placeholder="url 주소를 입력해 주세요."
-            value={content.imageUrl}
-          ></StContentAddFormInput>
+            value={content.imageUrl}></StContentAddFormInput>
         </div>
 
         <div>
@@ -56,8 +57,7 @@ const ContentAddForm = () => {
             name="title"
             onChange={onChangeHandler}
             placeholder="제목을 입력해 주세요."
-            value={content.title}
-          ></StContentAddFormInput>
+            value={content.title}></StContentAddFormInput>
         </div>
 
         <div>
@@ -65,8 +65,7 @@ const ContentAddForm = () => {
             name="text"
             onChange={onChangeHandler}
             placeholder="내용을 입력해 주세요."
-            value={content.text}
-          ></StContentAddFormInput3>
+            value={content.text}></StContentAddFormInput3>
         </div>
 
         <StContentAddButtons>

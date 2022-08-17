@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
@@ -29,8 +31,6 @@ const CommentForm = () => {
     }
     dispatch(postContent(comment));
   };
-
-  // console.log(comment)
 
   return (
     <form onSubmit={onSubmitHandler}>
