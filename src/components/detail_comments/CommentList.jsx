@@ -15,12 +15,6 @@ const CommentList = () => {
   const currentContent = contents.filter((cur) => cur.id == param);
   const comments = currentContent.map((abc) => abc.comments);
 
-  const contents = useSelector((state) => state.content.list);
-
-  const currentContent = contents.filter((cur) => cur.id == param);
-
-  const comments = currentContent.map((abc) => abc.comments);
-
   // 수정 삭제용 콘솔
   // console.log(contents);
   // console.log(currentContent);
@@ -61,8 +55,7 @@ const CommentList = () => {
                       } else {
                         return;
                       }
-                    }}
-                  >
+                    }}>
                     삭제
                   </button>
                 </StCommentButtons>
