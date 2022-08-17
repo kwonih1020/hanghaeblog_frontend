@@ -2,32 +2,41 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteContent, updateContent } from "../../redux/modules/contentSlice";
-import { useState } from "react";
+import { deleteContent, updateContent, getSingleContent } from "../../redux/modules/contentSlice";
+import { useEffect, useState } from "react";
 
 const ContentDetailContainer = () => {
   const navigate = useNavigate();
-  const content = useSelector((state) => state.content.list);
+  const content = useSelector((state) => state.contentSlice.singleContent);
+  console.log("컨텐츠 콘솔입니다.",content.title)
+  
   const params = useParams();
   const param = parseInt(params.id);
   const dispatch = useDispatch();
-  const contentUrl = content.find((cur) => cur.id === param);
+  // const contentUrl = content.find((cur) => cur.id === param);
 
   const [isEdit, setIsEdit] = useState(false);
   const [updateTitle, SetUpdateTitle] = useState();
   const [updateText, SetUpdateText] = useState();
 
-  const onSaveHandler = () => {
-    dispatch(
-      updateContent({
-        ...contentUrl,
-        id: contentUrl.id,
-        title: updateTitle,
-        text: updateText,
-      })
-    );
-    setIsEdit(false);
-  };
+
+
+  useEffect(() => {
+    dispatch(getSingleContent(param))
+  },[])
+
+
+  // const onSaveHandler = () => {
+  //   dispatch(
+  //     updateContent({
+  //       ...contentUrl,
+  //       id: contentUrl.id,
+  //       title: updateTitle,
+  //       text: updateText,
+  //     })
+  //   );
+  //   setIsEdit(false);
+  // };
 
   const onCansleButtonHandler = () => {
     setIsEdit(false);
@@ -37,10 +46,10 @@ const ContentDetailContainer = () => {
     setIsEdit(true);
   };
 
-  const deleteHandler = () => {
-    dispatch(deleteContent(contentUrl.id));
-    navigate("/");
-  };
+  // const deleteHandler = () => {
+  //   dispatch(deleteContent(contentUrl.id));
+  //   navigate("/");
+  // };
 
   return (
     <div>
@@ -71,7 +80,7 @@ const ContentDetailContainer = () => {
           </div>
 
           <div>
-            <button onClick={onSaveHandler}>저장하기</button>
+            {/* <button onClick={onSaveHandler}>저장하기</button> */}
 
             <button onClick={onCansleButtonHandler}>취소하기</button>
           </div>
@@ -81,12 +90,12 @@ const ContentDetailContainer = () => {
           <div>ContentDetailContainer</div>
 
           <StImageUrlBox>
-            <div>{contentUrl.imageUrl}</div>
+            {/* <div>{contentUrl.imageUrl}</div> */}
           </StImageUrlBox>
 
           <div>
-            <h1>{contentUrl.title}</h1>
-            <h2>{contentUrl.text}</h2>
+            <h1>{content.title}</h1>
+            <h2>{content.text}</h2>
           </div>
 
           <div>
@@ -97,7 +106,8 @@ const ContentDetailContainer = () => {
                 event.stopPropagation();
                 const result = window.confirm("진짜로 삭제하시겠습니까?");
                 if (result) {
-                  return deleteHandler();
+                  return 
+                  // deleteHandler();
                 } else {
                   return;
                 }

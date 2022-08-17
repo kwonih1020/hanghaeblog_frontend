@@ -11,9 +11,9 @@ const CommentList = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const param = parseInt(params.id);
-  const contents = useSelector((state) => state.content.list);
-  const currentContent = contents.filter((cur) => cur.id == param);
-  const comments = currentContent.map((abc) => abc.comments);
+  // const contents = useSelector((state) => state.contentSlice.list.data);
+  // const currentContent = contents.filter((cur) => cur.id == param);
+  // const comments = currentContent.map((abc) => abc.comments);
 
   // 수정 삭제용 콘솔
   // console.log(contents);
@@ -27,9 +27,9 @@ const CommentList = () => {
   //   dispatch(getContent());
   // }, [dispatch]);
 
-  const deleteHandler = () => {
-    dispatch(deleteContent(comments[0].id));
-  };
+  // const deleteHandler = () => {
+  //   dispatch(deleteContent(comments[0].id));
+  // };
 
   useEffect(() => {
     dispatch(getContent());
@@ -37,7 +37,7 @@ const CommentList = () => {
 
   return (
     <StCommentList>
-      CommentList
+      {/* CommentList
       {comments[0] &&
         comments[0].map((comment, index) => {
           return (
@@ -62,7 +62,7 @@ const CommentList = () => {
               </StCommentsBody>
             </div>
           );
-        })}
+        })} */}
     </StCommentList>
   );
 };

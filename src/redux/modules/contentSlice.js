@@ -21,6 +21,7 @@ let config = {
 
 const initialState = {
   list: [],
+  singleContent: {},
 };
 
 export const getContent = createAsyncThunk(
@@ -28,9 +29,23 @@ export const getContent = createAsyncThunk(
   async (extr, thunkAPI) => {
     try {
       const { data } = await axios.get("http://43.200.1.214:8080/api/content");
-      console.log(data);
-      console.log(data)
-      return thunkAPI.fulfillWithValue(data);
+
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
+export const getSingleContent = createAsyncThunk(
+  "content/getSingleContent",
+  async (arg, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `http://43.200.1.214:8080/api/content/${arg}`
+      );
+          
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -46,8 +61,7 @@ export const postContent = createAsyncThunk(
         args,
         config
       );
-      console.log(data);
-      // console.log("여기까지오냐?");
+
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -80,7 +94,7 @@ export const updateContent = createAsyncThunk(
         },
         config
       );
-      console.log("여기까지오냐?");
+
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -97,18 +111,17 @@ export const contentSlice = createSlice({
       state.list = action.payload;
     },
     [postContent.fulfilled]: (state, action) => {
-      // console.log("여기까지오냐?");
-      // state.list.push(action.payload);
       state.list = [...state.list.data, action.payload];
     },
-    [deleteContent.fulfilled]: (state, action) => {
-      // console.log("여기까지오냐?");
-    },
+    [deleteContent.fulfilled]: (state, action) => {},
     [updateContent.fulfilled]: (state, action) => {
       const target = state.list.findIndex(
         (content) => content.id === action.payload.id
       );
       state.list.splice(target, 1, action.payload);
+    },
+    [getSingleContent.fulfilled]: (state, action) => {
+      state.singleContent = action.payload;
     },
   },
 });
