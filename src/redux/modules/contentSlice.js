@@ -21,7 +21,13 @@ let config = {
 
 const initialState = {
   list: [],
-  singleContent: {},
+  singleContent: {
+    // id: 0,
+    // title: "",
+    // text: "",
+  },
+  isLoading: false,
+  err: null,
 };
 
 export const getContent = createAsyncThunk(
@@ -29,23 +35,8 @@ export const getContent = createAsyncThunk(
   async (extr, thunkAPI) => {
     try {
       const { data } = await axios.get("http://43.200.1.214:8080/api/content");
-
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.code);
-    }
-  }
-);
-
-export const getSingleContent = createAsyncThunk(
-  "content/getSingleContent",
-  async (arg, thunkAPI) => {
-    try {
-      const { data } = await axios.get(
-        `http://43.200.1.214:8080/api/content/${arg}`
-      );
-          
-      return thunkAPI.fulfillWithValue(data.data);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -61,7 +52,8 @@ export const postContent = createAsyncThunk(
         args,
         config
       );
-
+      console.log(data);
+      // console.log("여기까지오냐?");
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -73,10 +65,19 @@ export const deleteContent = createAsyncThunk(
   "content/deleteContent",
   async (arg, thunkAPI) => {
     try {
-      axios.delete(`http://43.200.1.214:8080/api/content/${arg}`);
-      return thunkAPI.fulfillWithValue(arg);
+      const response = await axios.delete(
+        `http://43.200.1.214:8080/api/content/${arg}`,
+        config
+      );
+      const deletedRes = await axios.get(
+        "http://43.200.1.214:8080/api/content",
+        config
+      );
+      console.log(response);
+      console.log(deletedRes);
+      return thunkAPI.fulfillWithValue(deletedRes.data);
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.code);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -84,20 +85,40 @@ export const deleteContent = createAsyncThunk(
 export const updateContent = createAsyncThunk(
   "content/updateContent",
   async (arg, thunkAPI) => {
+    console.log(arg);
     try {
-      const targetId = arg.id;
-      axios.patch(
-        `http://43.200.1.214:8080/api/content/${targetId}`,
+      const id = arg.id;
+      const { title, text } = { ...arg };
+      const response = await axios.put(
+        `http://43.200.1.214:8080/api/content/${id}`,
         {
-          title: arg.title,
-          text: arg.text,
+          title,
+          text,
         },
         config
       );
-
-      return thunkAPI.fulfillWithValue(arg);
+      console.log(response);
+      console.log(response.data);
+      return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error.code);
+    }
+  }
+);
+
+export const getSingleContent = createAsyncThunk(
+  "content/getSingleContent",
+  async (args, thunkAPI) => {
+    try {
+      // console.log("args:", args);
+      // const targetId = args.id;
+      const response = await axios.get(
+        `http://43.200.1.214:8080/api/content/${args}`
+      );
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -107,21 +128,63 @@ export const contentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [getContent.pending]: (state, action) => {
+      state.isLoading = true;
+    },
     [getContent.fulfilled]: (state, action) => {
       state.list = action.payload;
+      console.log(action.payload);
+    },
+    [getContent.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload;
+    },
+    [postContent.pending]: (state, action) => {
+      state.isLoading = true;
     },
     [postContent.fulfilled]: (state, action) => {
+      // console.log("여기까지오냐?");
+      // state.list.push(action.payload);
       state.list = [...state.list.data, action.payload];
     },
-    [deleteContent.fulfilled]: (state, action) => {},
+    [postContent.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload;
+    },
+    [deleteContent.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [deleteContent.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list = action.payload;
+    },
+    [deleteContent.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload;
+    },
+    [updateContent.pending]: (state, action) => {
+      state.isLoading = true;
+    },
     [updateContent.fulfilled]: (state, action) => {
-      const target = state.list.findIndex(
-        (content) => content.id === action.payload.id
-      );
-      state.list.splice(target, 1, action.payload);
+      state.isLoading = false;
+      console.log(action.payload);
+      state.singleContent = action.payload;
+    },
+    [updateContent.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload;
+    },
+    [getSingleContent.pending]: (state, action) => {
+      state.isLoading = true;
     },
     [getSingleContent.fulfilled]: (state, action) => {
+      state.isLoading = false;
       state.singleContent = action.payload;
+      // console.log("11");
+    },
+    [getSingleContent.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.err = action.payload;
     },
   },
 });
