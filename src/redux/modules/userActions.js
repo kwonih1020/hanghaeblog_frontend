@@ -54,6 +54,7 @@ export const userLogin = createAsyncThunk(
         // store user's token in local storage
         localStorage.setItem("userToken", response.headers.authorization);
         localStorage.setItem("loginId", response.data.data.loginId);
+        // localStorage.setItem("refreshToken", response.data.data.refreshToken);
         console.log(response);
         window.alert("로그인 성공");
         return thunkAPI.fulfillWithValue(response);
