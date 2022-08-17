@@ -3,9 +3,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../redux/modules/userSlice";
+import { useSelector } from "react-redux";
 import Button from "../elements/Button";
+import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
   const { userInfo } = useSelector((state) => state.user);
@@ -13,7 +13,30 @@ const GlobalHeadder = ({ children }) => {
 
   const loginId = localStorage.getItem("loginId");
 
-  const dispatch = useDispatch();
+  // 로그아웃
+  const logout = async () => {
+    const confirm = window.confirm("Are you Sure?");
+    if (confirm === true) {
+      const userToken = localStorage.getItem("userToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `${userToken}`,
+        refreshToken: `${refreshToken}`,
+      };
+      axios.post(
+        "http://43.200.1.214:8080/api/member/logout",
+        {},
+        {
+          headers: headers,
+        }
+      );
+      window.localStorage.clear();
+      window.location.replace("/");
+    } else if (confirm === false) {
+      return;
+    }
+  };
 
   return (
     <StGlobalHeader>
@@ -26,10 +49,7 @@ const GlobalHeadder = ({ children }) => {
         <div>{userInfo ? `${loginId}님께서 로그인중` : "로그인하세요!"}</div>
         <div className="cta">
           {userInfo ? (
-            <Button
-              className="button"
-              onClick={() => dispatch(logout())}
-              size="medium">
+            <Button className="button" onClick={logout} size="medium">
               로그아웃
             </Button>
           ) : (

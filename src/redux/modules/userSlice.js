@@ -27,16 +27,16 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: (state) => {
-      localStorage.removeItem("userToken"); // deletes token from storage
-      localStorage.removeItem("loginId");
-      localStorage.removeItem("refreshToken");
-      state.loading = false;
-      state.userInfo = null;
-      state.userToken = null;
-      state.error = null;
-      // console.log(typeof userInfo);
-    },
+    // logout: (state) => {
+    //   localStorage.removeItem("userToken"); // deletes token from storage
+    //   localStorage.removeItem("loginId");
+    //   localStorage.removeItem("refreshToken");
+    //   state.loading = false;
+    //   state.userInfo = null;
+    //   state.userToken = null;
+    //   state.error = null;
+    //   // console.log(typeof userInfo);
+    // },
     loader: (state, action) => {
       state.userInfo = action.payload;
     },

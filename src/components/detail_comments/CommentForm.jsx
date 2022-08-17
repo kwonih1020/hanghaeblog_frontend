@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import GlobalLayout from "../../global/GlobalLayout";
 
 const CommentForm = () => {
   const params = useParams();
@@ -39,8 +40,7 @@ const CommentForm = () => {
           name="commentText"
           onChange={onChangeHandler}
           // placeholder="url 주소를 입력해 주세요."
-          value={comment.commentText}
-        ></StCommentInPut>
+          value={comment.commentText}></StCommentInPut>
 
         <button>댓글 등록하기</button>
       </StComentMakeBox>
