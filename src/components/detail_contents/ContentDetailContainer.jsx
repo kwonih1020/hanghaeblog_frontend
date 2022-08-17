@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteContent, updateContent } from "../../redux/modules/contentSlice";
 import { useState, useEffect } from "react";
 import { getSingleContent } from "../../redux/modules/contentSlice";
-// import axios from "axios";
 import GlobalLayout from "../../global/GlobalLayout";
 
 const ContentDetailContainer = () => {
