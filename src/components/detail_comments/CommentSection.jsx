@@ -7,8 +7,9 @@ import CommentForm from "./CommentForm";
 
 const CommentSection = () => {
   return (
-    <StcommentSectionbox>CommentSection
-      <CommentList />
+    <StcommentSectionbox>
+      CommentSection
+      {/* <CommentList /> */}
       <CommentForm />
     </StcommentSectionbox>
   );

@@ -27,7 +27,7 @@ const GlobalFooter = ({ children }) => {
         <span>팀 : 6조 &nbsp;</span>
         <br />
         <br />
-        <span>항해주주총회 &nbsp;</span>
+        <span>항해99 주주총회 &nbsp;</span>
         <br />
         <br />
         <span>Copyright 2022@All Rights Reserved.</span>

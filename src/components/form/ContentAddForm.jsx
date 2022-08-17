@@ -37,6 +37,7 @@ const ContentAddForm = () => {
     }
     dispatch(postContent(content));
     navigate("/");
+    setContent({ imageUrl: "", title: "", text: "" });
   };
 
   console.log(content);

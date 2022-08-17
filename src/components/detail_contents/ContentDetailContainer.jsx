@@ -1,114 +1,126 @@
-
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteContent, updateContent } from "../../redux/modules/contentSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getSingleContent } from "../../redux/modules/contentSlice";
+import GlobalLayout from "../../global/GlobalLayout";
 
 const ContentDetailContainer = () => {
   const navigate = useNavigate();
-  const content = useSelector((state) => state.content.list);
-  const params = useParams();
-  const param = parseInt(params.id);
   const dispatch = useDispatch();
-  const contentUrl = content.find((cur) => cur.id === param);
+
+  const content = useSelector((state) => state.contentSlice.singleContent);
+  console.log(content);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getSingleContent(parseInt(id)));
+  }, [id, dispatch]);
 
   const [isEdit, setIsEdit] = useState(false);
-  const [updateTitle, SetUpdateTitle] = useState();
-  const [updateText, SetUpdateText] = useState();
 
-  const onSaveHandler = () => {
-    dispatch(
-      updateContent({
-        ...contentUrl,
-        id: contentUrl.id,
-        title: updateTitle,
-        text: updateText,
-      })
-    );
-    setIsEdit(false);
-  };
+  const [newBody, setNewBody] = useState({
+    imageUrl: "",
+    title: "",
+    text: "",
+  });
 
-  const onCansleButtonHandler = () => {
-    setIsEdit(false);
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setNewBody({
+      ...newBody,
+      [name]: value,
+    });
   };
 
   const onEditHandler = () => {
-    setIsEdit(true);
+    if (isEdit) {
+      dispatch(
+        updateContent({
+          id: parseInt(id),
+          ...newBody,
+        })
+      );
+    }
+    setIsEdit(!isEdit);
+    setNewBody({
+      imageUrl: "",
+      title: "",
+      text: "",
+    });
+  };
+
+  const onCancelButtonHandler = () => {
+    setIsEdit(false);
   };
 
   const deleteHandler = () => {
-    dispatch(deleteContent(contentUrl.id));
+    dispatch(deleteContent(parseInt(id)));
     navigate("/");
   };
 
+  console.log(newBody);
+
   return (
-    <div>
-      {isEdit ? (
+    <>
+      <GlobalLayout>
         <StContentDetailContainerBox>
           <div>ContentDetailContainer</div>
-
-          <StImageUrlBox>
-            <input type="file" />
-          </StImageUrlBox>
-
-          <div>
-            <input
-              value={updateTitle}
-              type="text"
-              onChange={(event) => {
-                SetUpdateTitle(event.target.value);
-              }}
-            />
-            <br />
-            <input
-              value={updateText}
-              onChange={(event) => {
-                SetUpdateText(event.target.value);
-              }}
-              type="text"
-            />
-          </div>
-
-          <div>
-            <button onClick={onSaveHandler}>저장하기</button>
-
-            <button onClick={onCansleButtonHandler}>취소하기</button>
-          </div>
+          {isEdit === false ? (
+            <>
+              <StImageUrlBox>
+                <div>{content.imageUrl}</div>
+              </StImageUrlBox>
+              <div>
+                <h1>{content.title}</h1>
+                <h2>{content.text}</h2>
+              </div>
+              <div>
+                <button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const result = window.confirm("진짜로 삭제하시겠습니까?");
+                    if (result) {
+                      return deleteHandler();
+                    } else {
+                      return;
+                    }
+                  }}>
+                  삭제
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <StImageUrlBox>
+                <input type="file" />
+              </StImageUrlBox>
+              <input
+                // defaultValue={}
+                type="text"
+                name="title"
+                value={newBody.title}
+                onChange={onChangeHandler}
+              />
+              <br />
+              <input
+                // defaultValue={}
+                value={newBody.text}
+                name="text"
+                type="text"
+                onChange={onChangeHandler}
+              />
+              <button onClick={onCancelButtonHandler}>취소하기</button>
+            </>
+          )}
+          <button onClick={onEditHandler}>
+            {isEdit === false ? "수정하기" : " 저장하기"}
+          </button>
         </StContentDetailContainerBox>
-      ) : (
-        <StContentDetailContainerBox>
-          <div>ContentDetailContainer</div>
-
-          <StImageUrlBox>
-            <div>{contentUrl.imageUrl}</div>
-          </StImageUrlBox>
-
-          <div>
-            <h1>{contentUrl.title}</h1>
-            <h2>{contentUrl.text}</h2>
-          </div>
-
-          <div>
-            <button onClick={onEditHandler}>수정하기</button>
-
-            <button
-              onClick={(event) => {
-                event.stopPropagation();
-                const result = window.confirm("진짜로 삭제하시겠습니까?");
-                if (result) {
-                  return deleteHandler();
-                } else {
-                  return;
-                }
-              }}
-            >
-              삭제
-            </button>
-          </div>
-        </StContentDetailContainerBox>
-      )}
-    </div>
+      </GlobalLayout>
+    </>
   );
 };
 
