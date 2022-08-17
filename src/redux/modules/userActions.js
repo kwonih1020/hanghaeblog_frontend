@@ -5,6 +5,21 @@ import axios from "axios";
 
 // const loginServer = process.env.EC2_API_URL_LOGIN;
 
+// const userToken = localStorage.getItem("userToken")
+//   ? localStorage.getItem("userToken")
+//   : null;
+
+// const refreshToken = localStorage.getItem("refreshToken")
+//   ? localStorage.getItem("refreshToken")
+//   : null;
+
+// let configs = {
+//   headers: {
+//     Authorization: userToken,
+//     refreshToken: refreshToken,
+//   },
+// };
+
 export const registerUser = createAsyncThunk(
   // action type string
   "user/register",
@@ -82,14 +97,13 @@ export const userLogin = createAsyncThunk(
 //       const config = {
 //         headers: {
 //           "Content-Type": "application/json",
-//           refreshToken: refreshToken,
 //         },
 //       };
 //       // make request to backend
 //       const response = await axios.post(
 //         "http://43.200.1.214:8080/api/member/logout",
 //         { loginId, password },
-//         config
+//         configs
 //       );
 //       window.alert("로그아웃 성공");
 //       return thunkAPI.fulfillWithValue(response);
