@@ -14,8 +14,8 @@ const refreshToken = localStorage.getItem("refreshToken")
 
 let config = {
   headers: {
-    authorization: userToken,
-    refreshtoken: refreshToken,
+    Authorization: userToken,
+    refreshToken: refreshToken,
   },
 };
 
@@ -27,8 +27,9 @@ export const getContent = createAsyncThunk(
   "content/getContent",
   async (extr, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/content");
+      const { data } = await axios.get("http://43.200.1.214:8080/api/content");
       console.log(data);
+      console.log(data)
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -41,7 +42,7 @@ export const postContent = createAsyncThunk(
   async (args, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3001/content",
+        "http://43.200.1.214:8080/api/content",
         args,
         config
       );
@@ -58,7 +59,7 @@ export const deleteContent = createAsyncThunk(
   "content/deleteContent",
   async (arg, thunkAPI) => {
     try {
-      axios.delete(`http://localhost:3001/content/${arg}`);
+      axios.delete(`http://43.200.1.214:8080/api/content/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -72,7 +73,7 @@ export const updateContent = createAsyncThunk(
     try {
       const targetId = arg.id;
       axios.patch(
-        `http://localhost:3001/content/${targetId}`,
+        `http://43.200.1.214:8080/api/content/${targetId}`,
         {
           title: arg.title,
           text: arg.text,
@@ -98,7 +99,7 @@ export const contentSlice = createSlice({
     [postContent.fulfilled]: (state, action) => {
       // console.log("여기까지오냐?");
       // state.list.push(action.payload);
-      state.list = [...state.list, action.payload];
+      state.list = [...state.list.data, action.payload];
     },
     [deleteContent.fulfilled]: (state, action) => {
       // console.log("여기까지오냐?");
