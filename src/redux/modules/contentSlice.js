@@ -4,6 +4,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const userToken = localStorage.getItem("userToken")
+  ? localStorage.getItem("userToken")
+  : null;
+
+const refreshToken = localStorage.getItem("refreshToken")
+  ? localStorage.getItem("refreshToken")
+  : null;
+
+let config = {
+  headers: {
+    authorization: userToken,
+    refreshtoken: refreshToken,
+  },
+};
+
 const initialState = {
   list: [],
 };
@@ -13,6 +28,7 @@ export const getContent = createAsyncThunk(
   async (extr, thunkAPI) => {
     try {
       const { data } = await axios.get("http://localhost:3001/content");
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -24,7 +40,12 @@ export const postContent = createAsyncThunk(
   "content/postContent",
   async (args, thunkAPI) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/content", args);
+      const { data } = await axios.post(
+        "http://localhost:3001/content",
+        args,
+        config
+      );
+      console.log(data);
       // console.log("여기까지오냐?");
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
@@ -50,10 +71,14 @@ export const updateContent = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const targetId = arg.id;
-      axios.patch(`http://localhost:3001/content/${targetId}`, {
-        title: arg.title,
-        text: arg.text,
-      });
+      axios.patch(
+        `http://localhost:3001/content/${targetId}`,
+        {
+          title: arg.title,
+          text: arg.text,
+        },
+        config
+      );
       console.log("여기까지오냐?");
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
@@ -72,7 +97,8 @@ export const contentSlice = createSlice({
     },
     [postContent.fulfilled]: (state, action) => {
       // console.log("여기까지오냐?");
-      state.list.push(action.payload);
+      // state.list.push(action.payload);
+      state.list = [...state.list, action.payload];
     },
     [deleteContent.fulfilled]: (state, action) => {
       // console.log("여기까지오냐?");
