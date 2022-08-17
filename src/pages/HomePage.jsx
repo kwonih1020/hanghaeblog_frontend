@@ -21,7 +21,6 @@ const HomePage = () => {
     <div>
       <GlobalLayout>
         <ContentListContainer>
-          <ContentCard />
         </ContentListContainer>
       </GlobalLayout>
     </div>

@@ -6,9 +6,6 @@ import { postContent } from "../../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-
-
-
 const ContentAddForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,22 +15,14 @@ const ContentAddForm = () => {
     title: "",
     text: "",
   });
-  
-  
-  
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setContent({
       ...content,
-      [name]: value });
+      [name]: value,
+    });
   };
-
-  // const contentBox = {
-    //   imageUrl: content.imageUrl,
-    //   title: content.title,
-    //   text: content.text,
-    // };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -45,14 +34,13 @@ const ContentAddForm = () => {
       return alert("모든 항목을 입력해주세요.");
     }
     dispatch(postContent(content));
-    navigate("/")
-
-    
+    navigate("/");
   };
-  
-  console.log(content)
+
+  console.log(content);
   return (
-    <StContentAddBox> ContentAddForm
+    <StContentAddBox>
+      ContentAddForm
       <form>
         <div>
           <StContentAddFormInput
@@ -82,64 +70,61 @@ const ContentAddForm = () => {
         </div>
 
         <StContentAddButtons>
-          <StContentAddFormButton onClick={onSubmitHandler}>저장하기</StContentAddFormButton>
-          <StContentAddFormButton onClick={() => navigate("/")}>취소</StContentAddFormButton>
+          <StContentAddFormButton onClick={onSubmitHandler}>
+            저장하기
+          </StContentAddFormButton>
+          <StContentAddFormButton onClick={() => navigate("/")}>
+            취소
+          </StContentAddFormButton>
         </StContentAddButtons>
       </form>
-      
     </StContentAddBox>
   );
 };
 
 export default ContentAddForm;
 
-
-
 const StContentAddBox = styled.div`
   width: 500px;
   height: 500px;
   border-radius: 10px;
-  /* border: 1px solid rgb(2, 19, 19); */
   margin: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: center;
-  `
+`;
 
 const StContentAddFormInput = styled.input`
-width: 450px;
-height: 90px;
-border-radius: 10px;
-margin: auto auto 5px auto ;
-border: 2px solid rgb(2, 19, 19);
-
-`
+  width: 450px;
+  height: 90px;
+  border-radius: 10px;
+  margin: auto auto 5px auto;
+  border: 2px solid rgb(2, 19, 19);
+`;
 const StContentAddFormInput3 = styled.input`
-width: 450px;
-height: 250px;
-margin: auto;
-border-radius: 10px;
-border: 2px solid rgb(2, 19, 19);
-`
+  width: 450px;
+  height: 250px;
+  margin: auto;
+  border-radius: 10px;
+  border: 2px solid rgb(2, 19, 19);
+`;
 
 const StContentAddFormButton = styled.button`
-width: 200px;
-height: 50px;
-border-radius: 10px;
-border: 2px solid rgb(2, 19, 19);
-cursor: pointer;
-`
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid rgb(2, 19, 19);
+  cursor: pointer;
+`;
 const StContentAddButtons = styled.div`
-width: 458px;
-height: 50px;
-border-radius: 10px;
-/* border: 2px solid rgb(2, 19, 19); */
-display: flex;
-/* justify-content: center; */
-align-content: center;
-align-items: center;
-justify-content: space-between;
-margin: 20px auto;
-`
+  width: 458px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto;
+`;
