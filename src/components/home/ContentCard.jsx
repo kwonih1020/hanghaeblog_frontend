@@ -11,11 +11,10 @@ const ContentCard = () => {
   const navigate = useNavigate();
   const content = useSelector((state) => state.content.list);
 
-  console.log(content);
-
   useEffect(() => {
     dispatch(getContent());
   }, [dispatch]);
+  console.log(content);
 
   return (
     <StContentBoxs>
@@ -25,14 +24,13 @@ const ContentCard = () => {
           <strong>+</strong>
         </h1>
       </StContentContainer>
-
       {content.map((content, index) => {
         return (
           <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
             <StContentContainer>
               {/* <div>{content.imageUrl}</div> */}
-              <h1>{content.title}</h1>
-              <h2>{content.text}</h2>
+              <h3>{content.title}</h3>
+              <h4>{content.text}</h4>
             </StContentContainer>
           </div>
         );
@@ -44,8 +42,8 @@ const ContentCard = () => {
 export default ContentCard;
 
 const StContentContainer = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   margin: 10px;
   border: 1px solid rgb(2, 19, 19);
   border-radius: 12px;
@@ -55,6 +53,7 @@ const StContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: center;
+  justify-content: center;
   color: black;
 `;
 

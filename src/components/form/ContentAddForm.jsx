@@ -26,12 +26,6 @@ const ContentAddForm = () => {
     });
   };
 
-  // const contentBox = {
-  //   imageUrl: content.imageUrl,
-  //   title: content.title,
-  //   text: content.text,
-  // };
-
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (
@@ -48,7 +42,6 @@ const ContentAddForm = () => {
   console.log(content);
   return (
     <StContentAddBox>
-      {" "}
       ContentAddForm
       <form>
         <div>
@@ -94,7 +87,6 @@ const StContentAddBox = styled.div`
   width: 500px;
   height: 500px;
   border-radius: 10px;
-  /* border: 1px solid rgb(2, 19, 19); */
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -129,9 +121,7 @@ const StContentAddButtons = styled.div`
   width: 458px;
   height: 50px;
   border-radius: 10px;
-  /* border: 2px solid rgb(2, 19, 19); */
   display: flex;
-  /* justify-content: center; */
   align-content: center;
   align-items: center;
   justify-content: space-between;

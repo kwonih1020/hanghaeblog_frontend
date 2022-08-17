@@ -7,8 +7,7 @@ import CommentForm from "./CommentForm";
 
 const CommentSection = () => {
   return (
-    <StcommentSectionbox>
-      CommentSection
+    <StcommentSectionbox>CommentSection
       <CommentList />
       <CommentForm />
     </StcommentSectionbox>
@@ -28,5 +27,4 @@ const StcommentSectionbox = styled.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-  /* justify-content: space-around; */
 `;

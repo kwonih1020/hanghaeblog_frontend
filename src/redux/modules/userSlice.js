@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+// // eslint-disable-next-line
 
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, userLogin } from "./userActions";
@@ -28,7 +28,6 @@ const userSlice = createSlice({
       state.userInfo = null;
       state.userToken = null;
       state.error = null;
-
       // console.log(typeof userInfo);
     },
     loader: (state, action) => {

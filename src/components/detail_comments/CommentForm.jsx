@@ -32,8 +32,6 @@ const CommentForm = () => {
     dispatch(postContent(comment));
   };
 
-  console.log(comment);
-
   return (
     <form onSubmit={onSubmitHandler}>
       <StComentMakeBox>
@@ -41,7 +39,7 @@ const CommentForm = () => {
           name="commentText"
           onChange={onChangeHandler}
           // placeholder="url 주소를 입력해 주세요."
-          // value={comment.commentText}
+          value={comment.commentText}
         ></StCommentInPut>
 
         <button>댓글 등록하기</button>
@@ -56,7 +54,6 @@ const StComentMakeBox = styled.div`
   width: 450px;
   height: 60px;
   border-radius: 10px;
-  /* border: 4px solid rgb(2, 19, 19); */
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -67,9 +64,6 @@ const StCommentInPut = styled.input`
   width: 320px;
   height: 30px;
   border-radius: 10px;
-  /* border: 4px solid rgb(2, 19, 19); */
   margin: auto;
   display: flex;
-  /* flex-direction: row;
-  justify-content: center; */
 `;

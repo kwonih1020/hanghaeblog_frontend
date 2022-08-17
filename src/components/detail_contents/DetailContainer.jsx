@@ -7,8 +7,7 @@ import CommentSection from "../detail_comments/CommentSection";
 
 const DetailContainer = () => {
   return (
-    <StDetailContainer>
-      DetailContainer
+    <StDetailContainer>DetailContainer
       <ContentDetailContainer />
       <CommentSection />
     </StDetailContainer>
