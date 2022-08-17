@@ -3,48 +3,41 @@
 import { React, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getContent } from "../../redux/modules/contentSlice";
+import { getComments } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
 import { deleteContent } from "../../redux/modules/contentSlice";
-import GlobalLayout from "../../global/GlobalLayout";
 
 const CommentList = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-  const param = parseInt(params.id);
-  const contents = useSelector((state) => state.contentSlice.list.data);
-  const currentContent = contents.filter((cur) => cur.id == param);
-  const comments = currentContent.map((abc) => abc.comments);
 
-  // 수정 삭제용 콘솔
-  // console.log(contents);
-  // console.log(currentContent);
-  // console.log(comments);
-  // console.log(comments[0]);
-  // const commentsIds = comments[0].map((abc) => abc.contentId);
-  // console.log(commentsIds);
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   dispatch(getContent());
-  // }, [dispatch]);
-
-  const deleteHandler = () => {
-    dispatch(deleteContent(comments[0].id));
-  };
+  const comments = useSelector(
+    (state) => state.contentSlice.singleContent.comments
+  );
+  console.log(comments);
 
   useEffect(() => {
-    dispatch(getContent());
+    dispatch(getComments(parseInt(id)));
   }, [dispatch]);
+
+  const deleteHandler = () => {
+    dispatch(deleteContent(comments.id));
+  };
 
   return (
     <StCommentList>
-      CommentList
-      {comments[0] &&
-        comments[0].map((comment, index) => {
-          return (
-            <div key={index}>
-              <StCommentsBody>
-                {comment.commentText}
+      <StCommentsBody>
+        {/* CommentList */}
+        {comments &&
+          comments.map((comment, i) => {
+            return (
+              <>
+                <div key={i}>
+                  ID#: {comment.id}
+                  작성자: {comment.author}
+                  댓글: {comment.commentText}
+                </div>
                 <StCommentButtons>
                   <button>수정</button>
                   <button
@@ -60,10 +53,10 @@ const CommentList = () => {
                     삭제
                   </button>
                 </StCommentButtons>
-              </StCommentsBody>
-            </div>
-          );
-        })}
+              </>
+            );
+          })}
+      </StCommentsBody>
     </StCommentList>
   );
 };
@@ -81,6 +74,7 @@ const StCommentList = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
+  overflow-y: scroll;
 `;
 
 const StCommentsBody = styled.div`

@@ -7,7 +7,8 @@ import CommentSection from "../detail_comments/CommentSection";
 
 const DetailContainer = () => {
   return (
-    <StDetailContainer>DetailContainer
+    <StDetailContainer>
+      DetailContainer
       <ContentDetailContainer />
       <CommentSection />
     </StDetailContainer>
@@ -24,4 +25,5 @@ const StDetailContainer = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;

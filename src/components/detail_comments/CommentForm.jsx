@@ -5,17 +5,15 @@ import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import GlobalLayout from "../../global/GlobalLayout";
 
 const CommentForm = () => {
-  const params = useParams();
-  const param = parseInt(params.id);
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   const [comment, setComment] = useState({
-    contentId: param,
+    contentId: id,
     commentText: "",
   });
-  const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
