@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 const ContentCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const content = useSelector((state) => state.content.list);
+  const content = useSelector((state) =>state);
+  console.log(content)
 
   useEffect(() => {
     dispatch(getContent());
   }, [dispatch]);
-  console.log(content);
+  // console.log(content);
 
   return (
     <StContentBoxs>
