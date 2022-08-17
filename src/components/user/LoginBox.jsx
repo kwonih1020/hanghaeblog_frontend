@@ -66,7 +66,7 @@ const LoginBox = () => {
           size="medium">
           로그인
         </Button>
-        <Kakao />
+        {/* <Kakao /> */}
       </form>
     </LoginBoxContainer>
   );
