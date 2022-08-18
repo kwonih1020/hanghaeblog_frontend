@@ -22,11 +22,7 @@ let config = {
 
 const initialState = {
   list: [],
-  singleContent: {
-    // id: 0,
-    // title: "",
-    // text: "",
-  },
+  singleContent: {},
   isLoading: false,
   err: null,
 };
