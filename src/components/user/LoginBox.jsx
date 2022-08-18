@@ -31,7 +31,7 @@ const LoginBox = () => {
     dispatch(userLogin(data));
     setTimeout(() => {
       window.location.replace("/");
-    }, 200);
+    }, 300);
   };
 
   return (
