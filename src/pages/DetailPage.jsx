@@ -7,7 +7,6 @@ import GlobalLayout from "../global/GlobalLayout";
 const DetailPage = () => {
   return (
     <GlobalLayout>
-      Detail Page
       <DetailContainer />
     </GlobalLayout>
   );

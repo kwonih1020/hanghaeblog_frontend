@@ -8,8 +8,6 @@ import styled from "styled-components";
 const FormPage = () => {
   return (
     <GlobalLayout>
-      {" "}
-      Form 페이지 입니다.
       <StAddFormBox>
         <ContentAddForm />
       </StAddFormBox>
@@ -22,7 +20,7 @@ export default FormPage;
 const StAddFormBox = styled.div`
   width: 700px;
   height: 700px;
-  border: 4px solid rgb(2, 19, 19);
+  /* border: 4px solid rgb(2, 19, 19); */
   border-radius: 12px;
   margin: auto;
   display: flex;

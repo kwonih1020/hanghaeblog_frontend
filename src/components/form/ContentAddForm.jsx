@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+// import Button from "../../elements/Button";
 
 const ContentAddForm = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,6 @@ const ContentAddForm = () => {
   console.log(content);
   return (
     <StContentAddBox>
-      ContentAddForm
       <form>
         <div>
           <StContentAddFormInput
@@ -101,22 +101,30 @@ const StContentAddFormInput = styled.input`
   height: 90px;
   border-radius: 10px;
   margin: auto auto 5px auto;
-  border: 2px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
+  display: flex;
 `;
 const StContentAddFormInput3 = styled.input`
   width: 450px;
   height: 250px;
   margin: auto;
   border-radius: 10px;
-  border: 2px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
 `;
 
 const StContentAddFormButton = styled.button`
   width: 200px;
   height: 50px;
   border-radius: 10px;
-  border: 2px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
   cursor: pointer;
+  background-color : white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  &:hover{  
+    background-color: rgba(252, 237, 239, 0.1);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color : #ee0000
+  }
 `;
 const StContentAddButtons = styled.div`
   width: 458px;
