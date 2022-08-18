@@ -2,33 +2,34 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
-import { postComment } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { postComments } from "../../redux/modules/commentSlice";
 
 const CommentForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [comment, setComment] = useState({
-    contentId: id,
-    commentText: "",
-  });
+  const [comment, setComment] = useState("");
 
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setComment({
-      ...comment,
-      [name]: value,
-    });
+  console.log(comment);
+
+  const onChangeHandler = (event) => {
+    setComment(event.target.value);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (comment.commentText.trim() === "") {
+    if (comment.commentText === "") {
       return alert("내용을 입력해 주세요.");
     }
-    dispatch(postComment(parseInt(id)))
+    dispatch(
+      postComments({
+        contentId: parseInt(id),
+        commentText: comment,
+      })
+    );
+    setComment(""); // 작동안함
   };
 
   return (
@@ -37,7 +38,7 @@ const CommentForm = () => {
         <StCommentInPut
           name="commentText"
           onChange={onChangeHandler}
-          // placeholder="url 주소를 입력해 주세요."
+          placeholder="댓글 작성"
           value={comment.commentText}></StCommentInPut>
 
         <button>댓글 등록하기</button>

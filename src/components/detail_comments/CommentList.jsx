@@ -1,49 +1,101 @@
 // eslint-disable-next-line
 
-import { React, useEffect } from "react";
+import { React, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getComments } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
-import { deleteContent } from "../../redux/modules/contentSlice";
+import { deleteComment, patchComment } from "../../redux/modules/commentSlice";
 
 const CommentList = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
-  const comments = useSelector(
-    (state) => state.contentSlice.singleContent.comments
-  );
-  // console.log(comments);
+  const comments = useSelector((state) => state.commentSlice.comments);
+  console.log(comments);
 
   useEffect(() => {
     dispatch(getComments(parseInt(id)));
-  }, [dispatch]);
+  }, [id, dispatch]);
 
-  const deleteHandler = () => {
-    dispatch(deleteContent(comments.id));
+  const deleteHandler = (id) => {
+    dispatch(deleteComment(id));
   };
+
+  // const [isEdit, setIsEdit] = useState(false);
+  // const [newDesc, setnewDesc] = useState(comments.commentText);
+  // const onChange = useCallback(
+  //   (e) => {
+  //     setnewDesc(e.target.value);
+  //   },
+  //   [newDesc]
+  // );
+
+  // const [isActive, setIsActive] = useState({
+  //   id: 0,
+  //   status: false,
+  // });
+
+  // const toggleActive = (id) => {
+  //   if (!isActive.status) {
+  //     setIsActive({ ...isActive, id, status: true });
+  //   } else {
+  //     setIsActive({ ...isActive, id: 0, status: false });
+  //   }
+  // };
+
+  // const onPatch = useCallback(() => {
+  //   if (isEdit) {
+  //     if (newDesc !== "") {
+  //       dispatch(
+  //         patchComment({
+  //           id,
+  //           newDesc,
+  //         })
+  //       );
+  //     }
+  //     setIsEdit(false);
+  //   } else {
+  //     setIsEdit(true);
+  //   }
+  //   toggleActive(id);
+  // }, [isEdit, newDesc]);
 
   return (
     <StCommentList>
+      CommentList
       <StCommentsBody>
-        CommentList
         {comments &&
           comments.map((comment, i) => {
             return (
-              <div key={i}>
-                {comment.id}
-                {comment.author}
-                {comment.commentText}
+              <div key={comment.id}>
+                <div>
+                  ID#: {comment.id}
+                  작성자: {comment.author}
+                  댓글: {comment.commentText}
+                </div>
                 <StCommentButtons>
-                  <button>수정</button>
+                  {/* <div>
+                    {isEdit ? (
+                      <input
+                        className="isEditInput"
+                        type="text"
+                        onChange={onChange}
+                        initValue={newDesc}
+                      />
+                    ) : (
+                      <p>{comment.commentText}</p>
+                    )}
+                  </div>
+                  <button onClick={onPatch}>{isEdit ? "취소" : "수정"}</button> */}
+
                   <button
                     onClick={(event) => {
                       event.stopPropagation();
                       const result = window.confirm("진짜로 삭제하시겠습니까?");
                       if (result) {
-                        return deleteHandler();
+                        return deleteHandler(comment.id);
                       } else {
                         return;
                       }

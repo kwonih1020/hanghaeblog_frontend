@@ -10,8 +10,8 @@ const ContentCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const contents = useSelector((state) => state.contentSlice.list.data);
+  // const contentsNew = useSelector((state) => state.contentSlice.list.data);
   console.log(contents);
-
 
   useEffect(() => {
     dispatch(getContent());
@@ -20,7 +20,7 @@ const ContentCard = () => {
   return (
     <StContentBoxs>
       <StContentContainer onClick={() => navigate("/add")}>
-        <h1>(●'◡'●)</h1>
+        {/* <h1>(●'◡'●)</h1> */}
         <h1>
           <strong>+</strong>
         </h1>
