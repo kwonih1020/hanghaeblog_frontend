@@ -37,12 +37,12 @@ const CommentList = () => {
     [isEdit]
   );
 
-  const onChange = useCallback(
-    (e) => {
-      setnewDesc(e.target.value);
-    },
-    [newDesc]
-  );
+  // const onChange = useCallback(
+  //   (e) => {
+  //     setnewDesc(e.target.value);
+  //   },
+  //   [newDesc]
+  // );
 
   // const [isActive, setIsActive] = useState({
   //   id: 0,
@@ -115,18 +115,6 @@ const CommentList = () => {
                   </StCommentBtn>
                 </StCommentButtons>
               </StCommentsBody>
-              {/* <button
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      const result = window.confirm("진짜로 삭제하시겠습니까?");
-                      if (result) {
-                        return deleteHandler(comment.id);
-                      } else {
-                        return;
-                      }
-                    }}>
-                    
-                  </button> */}
             </div>
           );
         })}

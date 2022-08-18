@@ -23,6 +23,9 @@ const CommentForm = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    if (comment === "") {
+      return alert("내용을 입력해 주세요.");
+    }
     dispatch(
       postComments({
         contentId: parseInt(id),
@@ -39,7 +42,7 @@ const CommentForm = () => {
           name="commentText"
           onChange={onChangeHandler}
           placeholder="댓글 작성"
-          value={comment.commentText}></StCommentInPut>
+          value={comment}></StCommentInPut>
 
         <StCommentFormButton>댓글 달기</StCommentFormButton>
       </StComentMakeBox>
