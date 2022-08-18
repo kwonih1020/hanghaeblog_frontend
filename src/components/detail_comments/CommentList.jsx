@@ -77,14 +77,12 @@ const CommentList = () => {
   return (
     <StCommentList>
       {/* CommentList */}
-      
-        {comments &&
-          comments.map((comment, i) => {
-            return (
-              <div key={i}>
-                <StCommentsBody>
-                
-                  <div>
+      {comments &&
+        comments.map((comment) => {
+          return (
+            <div key={comment.id}>
+              <StCommentsBody>
+                <div>
                   ID#: {comment.id}
                   작성자: {comment.author}
                   댓글: {comment.commentText}
@@ -115,9 +113,9 @@ const CommentList = () => {
                     }}>
                     {isEdit ? "취소" : "삭제"}
                   </button>
-                  
                 </StCommentButtons>
-                {/* <button
+              </StCommentsBody>
+              {/* <button
                     onClick={(event) => {
                       event.stopPropagation();
                       const result = window.confirm("진짜로 삭제하시겠습니까?");
@@ -129,10 +127,9 @@ const CommentList = () => {
                     }}>
                     
                   </button> */}
-              </div>
-            );
-          })}
-      
+            </div>
+          );
+        })}
     </StCommentList>
   );
 };
@@ -173,5 +170,4 @@ const StCommentButtons = styled.div`
   flex-direction: row;
   align-content: center;
   justify-content: flex-end;
-  
 `;
