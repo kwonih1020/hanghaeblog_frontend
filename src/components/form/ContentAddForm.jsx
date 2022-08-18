@@ -101,7 +101,7 @@ const StContentAddFormInput = styled.input`
   height: 90px;
   border-radius: 10px;
   margin: auto auto 5px auto;
-  border: 1px solid rgb(2, 19, 19);
+  border: 3px solid #eee;
   display: flex;
 `;
 const StContentAddFormInput3 = styled.input`
@@ -109,14 +109,14 @@ const StContentAddFormInput3 = styled.input`
   height: 250px;
   margin: auto;
   border-radius: 10px;
-  border: 1px solid rgb(2, 19, 19);
+  border: 3px solid #eee;
 `;
 
 const StContentAddFormButton = styled.button`
   width: 200px;
   height: 50px;
   border-radius: 10px;
-  border: 1px solid rgb(2, 19, 19);
+  border: 1px solid #eee;
   cursor: pointer;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;

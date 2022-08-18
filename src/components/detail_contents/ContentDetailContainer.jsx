@@ -148,7 +148,7 @@ const StImageUrlBox = styled.div`
 const StDetailButtons = styled.button`
   width: 100px;
   height: 25px;
-  border: 1px solid rgb(2, 19, 19);
+  border: 1px solid #eee;
   border-radius: 10px;
   display: flex;
   align-content: center;
@@ -166,13 +166,12 @@ const StDetailButtons = styled.button`
       rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     color: #ee0000;
   }
-  /* flex-direction: column;  */
 `;
 
 const StDetailButtons2 = styled.button`
   width: 100px;
   height: 25px;
-  border: 1px solid rgb(2, 19, 19);
+  border: 1px solid #eee;
   border-radius: 10px;
   display: flex;
   align-content: center;
