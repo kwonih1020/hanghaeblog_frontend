@@ -13,8 +13,8 @@ const refreshToken = localStorage.getItem("refreshToken")
 
 let config = {
   headers: {
-    authorization: userToken,
-    refreshtoken: refreshToken,
+    Authorization: userToken,
+    refreshToken: refreshToken,
   },
 };
 

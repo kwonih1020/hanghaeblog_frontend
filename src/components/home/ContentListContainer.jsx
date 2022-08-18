@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const ContentListContainer = () => {
   return (
-    <StListWrapper>ContentListContainer
+    <StListWrapper>
       <ContentCard />
     </StListWrapper>
   );
