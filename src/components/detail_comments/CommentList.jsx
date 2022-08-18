@@ -75,8 +75,8 @@ const CommentList = () => {
                   작성자: {comment.author}
                   댓글: {comment.commentText}
                 </div>
-                <StCommentButtons>
-                  {/* <div>
+                <div></div>
+                {/* <div>
                     {isEdit ? (
                       <input
                         className="isEditInput"
@@ -89,7 +89,7 @@ const CommentList = () => {
                     )}
                   </div>
                   <button onClick={onPatch}>{isEdit ? "취소" : "수정"}</button> */}
-
+                <StCommentButtons>
                   <button
                     onClick={(event) => {
                       event.stopPropagation();
