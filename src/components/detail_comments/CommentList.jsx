@@ -15,22 +15,34 @@ const CommentList = () => {
   const comments = useSelector((state) => state.commentSlice.comments);
   console.log(comments);
 
+  const [isEdit, setIsEdit] = useState(false);
+  const [newDesc, setnewDesc] = useState(comments);
+
+  console.log(newDesc);
+
   useEffect(() => {
     dispatch(getComments(parseInt(id)));
   }, [id, dispatch]);
 
-  const deleteHandler = (id) => {
-    dispatch(deleteComment(id));
-  };
+  const deleteHandler = useCallback(
+    (id) => {
+      if (!isEdit) {
+        dispatch(deleteComment(id));
+        setIsEdit(false);
+      } else if (isEdit) {
+        // toggleActive(id);
+        setIsEdit(!isEdit);
+      }
+    },
+    [isEdit]
+  );
 
-  // const [isEdit, setIsEdit] = useState(false);
-  // const [newDesc, setnewDesc] = useState(comments.commentText);
-  // const onChange = useCallback(
-  //   (e) => {
-  //     setnewDesc(e.target.value);
-  //   },
-  //   [newDesc]
-  // );
+  const onChange = useCallback(
+    (e) => {
+      setnewDesc(e.target.value);
+    },
+    [newDesc]
+  );
 
   // const [isActive, setIsActive] = useState({
   //   id: 0,
@@ -69,7 +81,7 @@ const CommentList = () => {
         {comments &&
           comments.map((comment, i) => {
             return (
-              <div key={comment.id}>
+              <div key={i}>
                 <StCommentsBody>
                 
                   <div>
@@ -77,23 +89,20 @@ const CommentList = () => {
                   작성자: {comment.author}
                   댓글: {comment.commentText}
                 </div>
-
-
-
+                {/* <div>
+                  {isEdit ? (
+                    <input
+                      className="isEditInput"
+                      type="text"
+                      onChange={onChange}
+                      defaultValue={newDesc}
+                    />
+                  ) : (
+                    <p>{comment.commentText}</p>
+                  )}
+                </div> */}
                 <StCommentButtons>
-                    {isEdit ? (
-                      <input
-                        className="isEditInput"
-                        type="text"
-                        onChange={onChange}
-                        initValue={newDesc}
-                      />
-                    ) : (
-                      <p>{comment.commentText}</p>
-                    )}
-                  </div>
-                  <button onClick={onPatch}>{isEdit ? "취소" : "수정"}</button> */}
-
+                  {/* <button onClick={onPatch}>수정</button> */}
                   <button
                     onClick={(event) => {
                       event.stopPropagation();
@@ -104,13 +113,22 @@ const CommentList = () => {
                         return;
                       }
                     }}>
-                    삭제
+                    {isEdit ? "취소" : "삭제"}
                   </button>
                   
                 </StCommentButtons>
-
-
-                </StCommentsBody>
+                {/* <button
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      const result = window.confirm("진짜로 삭제하시겠습니까?");
+                      if (result) {
+                        return deleteHandler(comment.id);
+                      } else {
+                        return;
+                      }
+                    }}>
+                    
+                  </button> */}
               </div>
             );
           })}

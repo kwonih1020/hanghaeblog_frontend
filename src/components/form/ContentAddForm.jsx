@@ -37,7 +37,7 @@ const ContentAddForm = () => {
       return alert("모든 항목을 입력해주세요.");
     }
     dispatch(postContent(content));
-    navigate("/");
+    navigate(-1);
     setContent({ imageUrl: "", title: "", text: "" });
   };
 
