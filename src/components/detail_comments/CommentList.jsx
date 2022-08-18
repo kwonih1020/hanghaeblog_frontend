@@ -1,57 +1,101 @@
-// // eslint-disable-next-line
+// eslint-disable-next-line
 
-// import { React, useEffect } from "react";
+import { React, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
-// import { useSelector, useDispatch } from "react-redux";
-// import { getContent } from "../../redux/modules/contentSlice";
-// import { useParams } from "react-router-dom";
-// import { deleteContent } from "../../redux/modules/contentSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { getComments } from "../../redux/modules/commentSlice";
+import { useParams } from "react-router-dom";
+import { deleteComment, patchComment } from "../../redux/modules/commentSlice";
 
 const CommentList = () => {
-  // const dispatch = useDispatch();
-  // const params = useParams();
-  // const param = parseInt(params.id);
-  // const contents = useSelector((state) => state.contentSlice.list.data);
-  // const currentContent = contents.filter((cur) => cur.id == param);
-  // const comments = currentContent.map((abc) => abc.comments);
+  const dispatch = useDispatch();
 
-//   // 수정 삭제용 콘솔
-//   // console.log(contents);
-//   // console.log(currentContent);
-//   // console.log(comments);
-//   // console.log(comments[0]);
-//   // const commentsIds = comments[0].map((abc) => abc.contentId);
-//   // console.log(commentsIds);
+  const { id } = useParams();
 
-//   // useEffect(() => {
-//   //   dispatch(getContent());
-//   // }, [dispatch]);
+  const comments = useSelector((state) => state.commentSlice.comments);
+  console.log(comments);
 
-  // const deleteHandler = () => {
-  //   dispatch(deleteContent(comments[0].id));
+  useEffect(() => {
+    dispatch(getComments(parseInt(id)));
+  }, [id, dispatch]);
+
+  const deleteHandler = (id) => {
+    dispatch(deleteComment(id));
+  };
+
+  // const [isEdit, setIsEdit] = useState(false);
+  // const [newDesc, setnewDesc] = useState(comments.commentText);
+  // const onChange = useCallback(
+  //   (e) => {
+  //     setnewDesc(e.target.value);
+  //   },
+  //   [newDesc]
+  // );
+
+  // const [isActive, setIsActive] = useState({
+  //   id: 0,
+  //   status: false,
+  // });
+
+  // const toggleActive = (id) => {
+  //   if (!isActive.status) {
+  //     setIsActive({ ...isActive, id, status: true });
+  //   } else {
+  //     setIsActive({ ...isActive, id: 0, status: false });
+  //   }
   // };
 
-//   useEffect(() => {
-//     dispatch(getContent());
-//   }, [dispatch]);
+  // const onPatch = useCallback(() => {
+  //   if (isEdit) {
+  //     if (newDesc !== "") {
+  //       dispatch(
+  //         patchComment({
+  //           id,
+  //           newDesc,
+  //         })
+  //       );
+  //     }
+  //     setIsEdit(false);
+  //   } else {
+  //     setIsEdit(true);
+  //   }
+  //   toggleActive(id);
+  // }, [isEdit, newDesc]);
 
   return (
     <StCommentList>
-      {/* CommentList
-      {comments[0] &&
-        comments[0].map((comment, index) => {
-          return (
-            <div key={index}>
-              <StCommentsBody>
-                {comment.commentText}
+      CommentList
+      <StCommentsBody>
+        {comments &&
+          comments.map((comment, i) => {
+            return (
+              <div key={comment.id}>
+                <div>
+                  ID#: {comment.id}
+                  작성자: {comment.author}
+                  댓글: {comment.commentText}
+                </div>
                 <StCommentButtons>
-                  <button>수정</button>
+                  {/* <div>
+                    {isEdit ? (
+                      <input
+                        className="isEditInput"
+                        type="text"
+                        onChange={onChange}
+                        initValue={newDesc}
+                      />
+                    ) : (
+                      <p>{comment.commentText}</p>
+                    )}
+                  </div>
+                  <button onClick={onPatch}>{isEdit ? "취소" : "수정"}</button> */}
+
                   <button
                     onClick={(event) => {
                       event.stopPropagation();
                       const result = window.confirm("진짜로 삭제하시겠습니까?");
                       if (result) {
-                        return deleteHandler();
+                        return deleteHandler(comment.id);
                       } else {
                         return;
                       }
@@ -59,10 +103,10 @@ const CommentList = () => {
                     삭제
                   </button>
                 </StCommentButtons>
-              </StCommentsBody>
-            </div>
-          );
-        })} */}
+              </div>
+            );
+          })}
+      </StCommentsBody>
     </StCommentList>
   );
 };
@@ -80,22 +124,23 @@ const StCommentList = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
+  overflow-y: scroll;
 `;
 
-// const StCommentsBody = styled.div`
-//   width: 430px;
-//   height: 30px;
-//   border-radius: 3px;
-//   border: 1px solid rgb(2, 19, 19);
-//   margin: auto;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-content: center;
-// `;
+const StCommentsBody = styled.div`
+  width: 430px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid rgb(2, 19, 19);
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+`;
 
-// const StCommentButtons = styled.div`
-//   width: 96px;
-//   height: 30px;
-//   display: flex;
-// `;
+const StCommentButtons = styled.div`
+  width: 96px;
+  height: 30px;
+  display: flex;
+`;

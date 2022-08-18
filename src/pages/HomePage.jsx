@@ -3,14 +3,13 @@
 import React from "react";
 import GlobalLayout from "../global/GlobalLayout";
 import ContentListContainer from "../components/home/ContentListContainer";
-import ContentCard from "../components/home/ContentCard";
+// import ContentCard from "../components/home/ContentCard";
 
 const HomePage = () => {
   return (
     <div>
       <GlobalLayout>
-        <ContentListContainer>
-        </ContentListContainer>
+        <ContentListContainer></ContentListContainer>
       </GlobalLayout>
     </div>
   );

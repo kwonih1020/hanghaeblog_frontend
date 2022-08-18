@@ -9,7 +9,7 @@ const CommentSection = () => {
   return (
     <StcommentSectionbox>
       CommentSection
-      {/* <CommentList /> */}
+      <CommentList />
       <CommentForm />
     </StcommentSectionbox>
   );
