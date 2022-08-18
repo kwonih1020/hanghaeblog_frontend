@@ -64,17 +64,21 @@ const CommentList = () => {
 
   return (
     <StCommentList>
-      CommentList
-      <StCommentsBody>
+      {/* CommentList */}
+      
         {comments &&
           comments.map((comment, i) => {
             return (
               <div key={comment.id}>
-                <div>
+                <StCommentsBody>
+                
+                  <div>
                   ID#: {comment.id}
                   작성자: {comment.author}
                   댓글: {comment.commentText}
                 </div>
+
+
                 <StCommentButtons>
                   {/* <div>
                     {isEdit ? (
@@ -89,7 +93,7 @@ const CommentList = () => {
                     )}
                   </div>
                   <button onClick={onPatch}>{isEdit ? "취소" : "수정"}</button> */}
-
+                  
                   <button
                     onClick={(event) => {
                       event.stopPropagation();
@@ -102,11 +106,15 @@ const CommentList = () => {
                     }}>
                     삭제
                   </button>
+                  
                 </StCommentButtons>
+
+
+                </StCommentsBody>
               </div>
             );
           })}
-      </StCommentsBody>
+      
     </StCommentList>
   );
 };
@@ -117,7 +125,7 @@ const StCommentList = styled.div`
   width: 450px;
   height: 250px;
   border-radius: 10px;
-  border: 4px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -130,17 +138,22 @@ const StCommentList = styled.div`
 const StCommentsBody = styled.div`
   width: 430px;
   height: 30px;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 1px solid rgb(2, 19, 19);
-  margin: auto;
+  margin-bottom: 2px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
+  flex-direction: row;
 `;
 
 const StCommentButtons = styled.div`
-  width: 96px;
+  width: 50px;
   height: 30px;
   display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
+  
 `;

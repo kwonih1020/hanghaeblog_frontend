@@ -21,7 +21,7 @@ const StcommentSectionbox = styled.div`
   width: 500px;
   height: 400px;
   border-radius: 10px;
-  border: 4px solid rgb(2, 19, 19);
+  border: 1px solid rgb(2, 19, 19);
   margin: auto;
   display: flex;
   flex-direction: column;
