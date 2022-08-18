@@ -13,23 +13,28 @@ const refreshToken = localStorage.getItem("refreshToken")
 
 let config = {
   headers: {
-    authorization: userToken,
-    refreshtoken: refreshToken,
+    Authorization: userToken,
+    refreshToken: refreshToken,
   },
 };
 
 const initialState = {
   list: [],
+  singleComment: {},
 };
 
-export const getComment = createAsyncThunk(
-  "comment/getComment",
-  async (kim, thunkAPI) => {
+export const getComments = createAsyncThunk(
+  "comment/getComments",
+  async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/comment");
-      return thunkAPI.fulfillWithValue(data);
+      const targetId = payload;
+      const response = await axios.get(
+        `http://43.200.1.214:8080/api/content/${targetId}`
+      );
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.code);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -38,12 +43,13 @@ export const postComment = createAsyncThunk(
   "comment/postComment",
   async (args, thunkAPI) => {
     try {
+      // const commentList = await axios.get("http://localhost:3001/content")
       const { data } = await axios.post(
-        "http://localhost:3001/comment",
+        `http://43.200.1.214:8080/api/content/${args}`,
         args,
         config
       );
-      console.log("여기까지오냐?");
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -61,7 +67,7 @@ export const commentSlice = createSlice({
     // [getContent.pending]: (state) => {
     //   state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     // },
-    [getComment.fulfilled]: (state, action) => {
+    [getComments.fulfilled]: (state, action) => {
       state.list = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
     },
     [postComment.fulfilled]: (state, action) => {

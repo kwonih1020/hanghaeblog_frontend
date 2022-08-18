@@ -11,7 +11,7 @@ const ContentDetailContainer = () => {
   const dispatch = useDispatch();
 
   const content = useSelector((state) => state.contentSlice.singleContent);
-  console.log(content);
+  // console.log(content);
 
   const { id } = useParams();
 
@@ -61,7 +61,7 @@ const ContentDetailContainer = () => {
     navigate("/");
   };
 
-  console.log(newBody);
+  // console.log(newBody);
 
   return (
     <>
