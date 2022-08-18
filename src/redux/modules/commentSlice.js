@@ -3,6 +3,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const commentServer = process.env.REACT_APP_COMMENT;
+
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
@@ -46,7 +48,7 @@ export const postComments = createAsyncThunk(
       const contentId = payload.contentId;
       const commentText = payload.commentText;
       const commentPost = await axios.post(
-        "http://43.200.1.214:8080/api/comment",
+        commentServer,
         {
           contentId: contentId,
           commentText: commentText,
@@ -67,7 +69,7 @@ export const deleteComment = createAsyncThunk(
     try {
       console.log(payload);
       const delCommentRes = await axios.delete(
-        `http://43.200.1.214:8080/api/comment/${payload}`,
+        commentServer + `/${payload}`,
         config
       );
       console.log(payload);
@@ -87,7 +89,7 @@ export const deleteComment = createAsyncThunk(
 //       console.log(commentId);
 //       console.log(commentText);
 //       const patchCommentRes = await axios.put(
-//         `http://43.200.1.214:8080/api/comment/${commentId}`,
+//         commentServer + `/${commentId}`,
 //         { commentId, commentText },
 //         config
 //       );
@@ -161,5 +163,5 @@ export const commentSlice = createSlice({
   },
 });
 
-export const {} = commentSlice.actions;
+// export const {} = commentSlice.actions;
 export default commentSlice.reducer;

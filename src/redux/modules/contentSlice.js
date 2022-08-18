@@ -1,8 +1,9 @@
 // eslint-disable-next-line
 
-// src/redux/modules/contentSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const contentServer = process.env.REACT_APP_CONTENT;
 
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
@@ -34,7 +35,7 @@ export const getContent = createAsyncThunk(
   "content/getContent",
   async (extr, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://43.200.1.214:8080/api/content");
+      const { data } = await axios.get(contentServer);
       console.log(data);
       // return thunkAPI.fulfillWithValue(data.data);
       return thunkAPI.fulfillWithValue(data);
@@ -48,11 +49,7 @@ export const postContent = createAsyncThunk(
   "content/postContent",
   async (args, thunkAPI) => {
     try {
-      const response = await axios.post(
-        "http://43.200.1.214:8080/api/content",
-        args,
-        config
-      );
+      const response = await axios.post(contentServer, args, config);
       console.log(response.data.data);
       // console.log("여기까지오냐?");
       return thunkAPI.fulfillWithValue(response.data.data);
@@ -66,14 +63,8 @@ export const deleteContent = createAsyncThunk(
   "content/deleteContent",
   async (arg, thunkAPI) => {
     try {
-      const response = await axios.delete(
-        `http://43.200.1.214:8080/api/content/${arg}`,
-        config
-      );
-      const deletedRes = await axios.get(
-        "http://43.200.1.214:8080/api/content",
-        config
-      );
+      const response = await axios.delete(contentServer + `/${arg}`, config);
+      const deletedRes = await axios.get(contentServer, config);
       console.log(response);
       console.log(deletedRes);
       return thunkAPI.fulfillWithValue(deletedRes.data);
@@ -91,7 +82,7 @@ export const updateContent = createAsyncThunk(
       const id = arg.id;
       const { title, text } = { ...arg };
       const response = await axios.put(
-        `http://43.200.1.214:8080/api/content/${id}`,
+        contentServer + `/${id}`,
         {
           title,
           text,
@@ -114,9 +105,7 @@ export const getSingleContent = createAsyncThunk(
     try {
       // console.log("args:", args);
       // const targetId = args.id;
-      const response = await axios.get(
-        `http://43.200.1.214:8080/api/content/${args}`
-      );
+      const response = await axios.get(contentServer + `/${args}`);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -37,12 +37,12 @@ const CommentList = () => {
     [isEdit]
   );
 
-  const onChange = useCallback(
-    (e) => {
-      setnewDesc(e.target.value);
-    },
-    [newDesc]
-  );
+  // const onChange = useCallback(
+  //   (e) => {
+  //     setnewDesc(e.target.value);
+  //   },
+  //   [newDesc]
+  // );
 
   // const [isActive, setIsActive] = useState({
   //   id: 0,
