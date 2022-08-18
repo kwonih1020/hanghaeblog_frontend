@@ -16,11 +16,10 @@ const ContentCard = () => {
     dispatch(getContent());
   }, [dispatch]);
 
-  const userToken = localStorage.getItem("userToken")
-    ? localStorage.getItem("userToken")
-    : null;
-
   const addFormPageHandler = () => {
+    const userToken = localStorage.getItem("userToken")
+      ? localStorage.getItem("userToken")
+      : null;
     if (userToken) {
       navigate("/add");
     } else {
@@ -42,6 +41,9 @@ const ContentCard = () => {
           return (
             <div
               onClick={() => {
+                const userToken = localStorage.getItem("userToken")
+                  ? localStorage.getItem("userToken")
+                  : null;
                 if (userToken) {
                   navigate(`/content/${content.id}`);
                 } else {

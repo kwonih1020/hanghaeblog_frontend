@@ -10,7 +10,7 @@ const ContentDetailContainer = () => {
   const dispatch = useDispatch();
 
   const content = useSelector((state) => state.contentSlice.singleContent);
-  // console.log(content);
+  // console.log(content.author);
 
   const { id } = useParams();
 
@@ -35,20 +35,27 @@ const ContentDetailContainer = () => {
   };
 
   const onEditHandler = () => {
-    if (isEdit) {
-      dispatch(
-        updateContent({
-          id: parseInt(id),
-          ...newBody,
-        })
-      );
+    const loginId = localStorage.getItem("loginId")
+      ? localStorage.getItem("loginId")
+      : null;
+    if (loginId === content.author) {
+      if (isEdit) {
+        dispatch(
+          updateContent({
+            id: parseInt(id),
+            ...newBody,
+          })
+        );
+      }
+      setIsEdit(!isEdit);
+      setNewBody({
+        imageUrl: "",
+        title: "",
+        text: "",
+      });
+    } else {
+      window.alert("다른 사용자에 게시글입니다");
     }
-    setIsEdit(!isEdit);
-    setNewBody({
-      imageUrl: "",
-      title: "",
-      text: "",
-    });
   };
 
   const onCancelButtonHandler = () => {
@@ -56,8 +63,15 @@ const ContentDetailContainer = () => {
   };
 
   const deleteHandler = () => {
-    dispatch(deleteContent(parseInt(id)));
-    navigate("/");
+    const loginId = localStorage.getItem("loginId")
+      ? localStorage.getItem("loginId")
+      : null;
+    if (loginId === content.author) {
+      dispatch(deleteContent(parseInt(id)));
+      navigate("/");
+    } else {
+      window.alert("This Post is not belong to you!");
+    }
   };
 
   // console.log(newBody);
