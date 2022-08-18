@@ -115,18 +115,6 @@ const CommentList = () => {
                   </button>
                 </StCommentButtons>
               </StCommentsBody>
-              {/* <button
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      const result = window.confirm("진짜로 삭제하시겠습니까?");
-                      if (result) {
-                        return deleteHandler(comment.id);
-                      } else {
-                        return;
-                      }
-                    }}>
-                    
-                  </button> */}
             </div>
           );
         })}

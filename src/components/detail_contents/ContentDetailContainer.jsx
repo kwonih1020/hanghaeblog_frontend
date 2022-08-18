@@ -67,12 +67,12 @@ const ContentDetailContainer = () => {
       <StContentDetailContainerBox>
         {isEdit === false ? (
           <>
-            <StImageUrlBox>
+            {/* <StImageUrlBox>
               <div>{content.imageUrl}</div>
-            </StImageUrlBox>
+            </StImageUrlBox> */}
             <div>
-              <h3>{content.title}</h3>
-              <h4>{content.text}</h4>
+              <h3>제목 : {content.title}</h3>
+              <h4>내용 : {content.text}</h4>
             </div>
             <div>
               <StDetailButtons
@@ -85,7 +85,7 @@ const ContentDetailContainer = () => {
                     return;
                   }
                 }}>
-                삭 제
+                삭제하기
               </StDetailButtons>
             </div>
           </>
@@ -95,7 +95,6 @@ const ContentDetailContainer = () => {
               <input type="file" />
             </StImageUrlBox>
             <input
-              // defaultValue={}
               type="text"
               name="title"
               value={newBody.title}
@@ -103,21 +102,21 @@ const ContentDetailContainer = () => {
             />
             <br />
             <input
-              // defaultValue={}
               value={newBody.text}
               name="text"
               type="text"
               onChange={onChangeHandler}
             />
-            <StDetailButtons onClick={onCancelButtonHandler}>취소하기</StDetailButtons>
+            <StDetailButtons onClick={onCancelButtonHandler}>
+              취소하기
+            </StDetailButtons>
           </>
         )}
         <div>
           <StDetailButtons2 onClick={onEditHandler}>
-          {isEdit === false ? "수정하기" : " 저장하기"}
-        </StDetailButtons2>
+            {isEdit === false ? "수정하기" : " 저장하기"}
+          </StDetailButtons2>
         </div>
-        
       </StContentDetailContainerBox>
     </>
   );
@@ -158,14 +157,16 @@ const StDetailButtons = styled.button`
   cursor: pointer;
   margin-bottom: 5px;
   cursor: pointer;
-  background-color : white;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  &:hover{  
+  &:hover {
     background-color: rgba(252, 237, 239, 0.3);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color : #ee0000
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color: #ee0000;
   }
-   /* flex-direction: column;  */
+  /* flex-direction: column;  */
 `;
 
 const StDetailButtons2 = styled.button`
@@ -180,12 +181,14 @@ const StDetailButtons2 = styled.button`
   cursor: pointer;
   margin-bottom: 5px;
   cursor: pointer;
-  background-color : white;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  &:hover{  
+  &:hover {
     background-color: rgba(210, 253, 222, 0.3);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color : #ee0000
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color: #ee0000;
   }
-   /* flex-direction: column;  */
+  /* flex-direction: column;  */
 `;

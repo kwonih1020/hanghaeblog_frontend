@@ -8,6 +8,8 @@ import Button from "../elements/Button";
 import axios from "axios";
 
 const GlobalHeadder = ({ children }) => {
+  const logoutServer = process.env.REACT_APP_LOGOUT;
+
   const { userInfo } = useSelector((state) => state.user);
   // console.log(userInfo);
 
@@ -25,7 +27,7 @@ const GlobalHeadder = ({ children }) => {
         refreshToken: `${refreshToken}`,
       };
       axios.post(
-        "http://43.200.1.214:8080/api/member/logout",
+        logoutServer,
         {},
         {
           headers: headers,
@@ -49,7 +51,10 @@ const GlobalHeadder = ({ children }) => {
         <div>{userInfo ? `${loginId}님께서 로그인중` : "로그인하세요!"}</div>
         <div className="cta">
           {userInfo ? (
-            <StGlobalHeaderButton className="button" onClick={logout} size="medium">
+            <StGlobalHeaderButton
+              className="button"
+              onClick={logout}
+              size="medium">
               <span style={{ color: "white" }}>로그아웃</span>
             </StGlobalHeaderButton>
           ) : (
@@ -118,12 +123,14 @@ const StGlobalHeaderButton = styled.button`
   align-items: center;
   margin-bottom: 5px;
   cursor: pointer;
-  background-color : #ee0000;
+  background-color: #ee0000;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  &:hover{  
+  &:hover {
     background-color: rgba(252, 237, 239, 0.3);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color : #ee0000
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color: #ee0000;
   }
-   /* flex-direction: column;  */
+  /* flex-direction: column;  */
 `;

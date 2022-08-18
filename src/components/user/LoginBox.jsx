@@ -29,6 +29,9 @@ const LoginBox = () => {
 
   const submitForm = (data) => {
     dispatch(userLogin(data));
+    setTimeout(() => {
+      window.location.replace("/");
+    }, 200);
   };
 
   return (
@@ -62,7 +65,7 @@ const LoginBox = () => {
           style={{ textAlign: "center", margin: "0 auto", width: "284px" }}
           type="submit"
           className="button"
-          disabled={loading}
+          // disabled={loading}
           size="medium">
           로그인
         </Button>

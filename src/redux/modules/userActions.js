@@ -3,6 +3,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const loginServer = process.env.REACT_APP_LOGIN;
+const signupServer = process.env.REACT_APP_SIGNUP;
+
 // const loginServer = process.env.EC2_API_URL_LOGIN;
 
 // const userToken = localStorage.getItem("userToken")
@@ -34,7 +37,7 @@ export const registerUser = createAsyncThunk(
       };
       // make request to backend
       const response = await axios.post(
-        "http://43.200.1.214:8080/api/member/signup",
+        signupServer,
         { loginId, password, passwordConfirm },
         config
       );
@@ -58,7 +61,7 @@ export const userLogin = createAsyncThunk(
         },
       };
       const response = await axios.post(
-        "http://43.200.1.214:8080/api/member/login",
+        loginServer,
         { loginId, password },
         config
       );

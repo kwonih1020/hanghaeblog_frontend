@@ -138,7 +138,7 @@ export const contentSlice = createSlice({
       console.log(action.payload);
       console.log(state.list);
       // state.list.push(...action.payload);
-      state.list = [...state.list, action.payload];
+      state.list = [{ ...state.list, ...action.payload }];
     },
     [postContent.rejected]: (state, action) => {
       state.isLoading = false;

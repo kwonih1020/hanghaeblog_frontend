@@ -20,7 +20,7 @@ const CommentForm = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (comment.commentText === "") {
+    if (comment === "") {
       return alert("내용을 입력해 주세요.");
     }
     dispatch(
@@ -39,7 +39,7 @@ const CommentForm = () => {
           name="commentText"
           onChange={onChangeHandler}
           placeholder="댓글 작성"
-          value={comment.commentText}></StCommentInPut>
+          value={comment}></StCommentInPut>
 
         <button>댓글 등록하기</button>
       </StComentMakeBox>
