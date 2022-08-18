@@ -1,13 +1,11 @@
 // eslint-disable-next-line
 
 import React from "react";
-// import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { postContent } from "../../redux/modules/contentSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import Button from "../../elements/Button";
 
 const ContentAddForm = () => {
   const dispatch = useDispatch();

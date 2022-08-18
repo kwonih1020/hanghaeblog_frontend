@@ -91,9 +91,9 @@ const ContentDetailContainer = () => {
           </>
         ) : (
           <>
-            <StImageUrlBox>
+            {/* <StImageUrlBox>
               <input type="file" />
-            </StImageUrlBox>
+            </StImageUrlBox> */}
             <input
               type="text"
               name="title"

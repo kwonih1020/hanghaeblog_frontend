@@ -16,9 +16,22 @@ const ContentCard = () => {
     dispatch(getContent());
   }, [dispatch]);
 
+  const userToken = localStorage.getItem("userToken")
+    ? localStorage.getItem("userToken")
+    : null;
+
+  const addFormPageHandler = () => {
+    if (userToken) {
+      navigate("/add");
+    } else {
+      window.alert("로그인 해주세요");
+    }
+  };
+
   return (
     <StContentBoxs>
-      <StContentContainer onClick={() => navigate("/add")}>
+      {/* <StContentContainer onClick={() => navigate("/add")}> */}
+      <StContentContainer onClick={addFormPageHandler}>
         {/* <h1>(●'◡'●)</h1> */}
         <h1>
           <strong>+</strong>
@@ -27,7 +40,15 @@ const ContentCard = () => {
       {contents &&
         contents.map((content, index) => {
           return (
-            <div onClick={() => navigate(`/content/${content.id}`)} key={index}>
+            <div
+              onClick={() => {
+                if (userToken) {
+                  navigate(`/content/${content.id}`);
+                } else {
+                  window.alert("로그인 해주세요");
+                }
+              }}
+              key={index}>
               <StContentContainer>
                 {/* <div>{content.imageUrl}</div> */}
                 <h3>{content.title}</h3>
