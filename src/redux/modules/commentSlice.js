@@ -31,7 +31,7 @@ export const getComments = createAsyncThunk(
     try {
       const targetId = payload;
       const response = await axios.get(contentServer + `/${targetId}`);
-      console.log(response);
+      // console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -43,7 +43,7 @@ export const postComments = createAsyncThunk(
   "comment/postComment",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      // console.log(payload);
       const contentId = payload.contentId;
       const commentText = payload.commentText;
       const commentPost = await axios.post(
@@ -54,7 +54,7 @@ export const postComments = createAsyncThunk(
         },
         config
       );
-      console.log(commentPost);
+      // console.log(commentPost);
       return thunkAPI.fulfillWithValue(commentPost.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -66,12 +66,12 @@ export const deleteComment = createAsyncThunk(
   "comment/deleteComment",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      // console.log(payload);
       const delCommentRes = await axios.delete(
         commentServer + `/${payload}`,
         config
       );
-      console.log(payload);
+      // console.log(payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -122,7 +122,7 @@ export const commentSlice = createSlice({
     [getComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.comments = action.payload.data.comments;
-      console.log(action.payload.data.comments);
+      // console.log(action.payload.data.comments);
     },
     [getComments.rejected]: (state, action) => {
       state.isLoading = false;
@@ -135,8 +135,8 @@ export const commentSlice = createSlice({
     [postComments.fulfilled]: (state, action) => {
       state.isLoading = false;
       // state.comments.push(...action.payload);
-      console.log(state.comments);
-      console.log(action.payload);
+      // console.log(state.comments);
+      // console.log(action.payload);
       state.comments = [...state.comments, action.payload];
     },
     [postComments.rejected]: (state, action) => {
@@ -150,7 +150,7 @@ export const commentSlice = createSlice({
     [deleteComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       // state.status = action.payload;
-      console.log(action.payload);
+      // console.log(action.payload);
       state.comments = state.comments.filter(
         (comment) => comment.id !== action.payload
       );
