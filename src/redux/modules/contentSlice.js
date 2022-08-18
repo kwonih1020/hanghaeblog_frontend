@@ -48,14 +48,14 @@ export const postContent = createAsyncThunk(
   "content/postContent",
   async (args, thunkAPI) => {
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://43.200.1.214:8080/api/content",
         args,
         config
       );
-      console.log(data);
+      console.log(response.data.data);
       // console.log("여기까지오냐?");
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(response.data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -148,8 +148,8 @@ export const contentSlice = createSlice({
       // console.log("여기까지오냐?");
       console.log(action.payload);
       console.log(state.list);
-      state.list.push(action.payload);
-      // state.list = [...state.list, action.payload];
+      // state.list.push(...action.payload);
+      state.list = [{...state.list, ...action.payload}];
     },
     [postContent.rejected]: (state, action) => {
       state.isLoading = false;

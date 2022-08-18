@@ -82,13 +82,16 @@ export const deleteComment = createAsyncThunk(
 //   "comment/patchComment",
 //   async (payload, thunkAPI) => {
 //     try {
-//       const targetId = payload.id;
-//       const newDesc = payload.newDesc;
+//       const commentId = payload.id;
+//       const commentText = payload.newDesc;
+//       console.log(commentId);
+//       console.log(commentText);
 //       const patchCommentRes = await axios.put(
-//         `http://43.200.1.214:8080/api/comment/${targetId}`,
-//         { commentText: newDesc },
+//         `http://43.200.1.214:8080/api/comment/${commentId}`,
+//         { commentId, commentText },
 //         config
 //       );
+//       console.log(patchCommentRes.data);
 //       return thunkAPI.fulfillWithValue(patchCommentRes.data);
 //     } catch (error) {
 //       return thunkAPI.rejectWithValue(error.message);
