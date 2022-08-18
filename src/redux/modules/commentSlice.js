@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const commentServer = process.env.REACT_APP_COMMENT;
+const contentServer = process.env.REACT_APP_CONTENT;
 
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
@@ -29,9 +30,7 @@ export const getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const targetId = payload;
-      const response = await axios.get(
-        `http://43.200.1.214:8080/api/content/${targetId}`
-      );
+      const response = await axios.get(contentServer + `/${targetId}`);
       console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (e) {

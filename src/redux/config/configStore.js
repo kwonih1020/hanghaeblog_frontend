@@ -18,6 +18,10 @@ const store = configureStore({
   //   getDefaultMiddleware({
   //     serializableCheck: false,
   //   }).concat(logger),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   devTools: true,
 });
 
