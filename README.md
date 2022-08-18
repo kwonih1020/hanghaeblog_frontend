@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+![header](https://capsule-render.vercel.app/api?type=waving&text=항해99주주총회&color=auto&height=200&animation=scaleIn)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align=center> 
+<img src="https://img.shields.io/badge/React.js-F7DF1E?style=for-the-badge&logo=react&logoColor=#3776AB"/>
+<img src="https://img.shields.io/badge/Styled_Components-000000?style=for-the-badge&logo=react&logoColor=#3776AB"/>
+<img src="https://img.shields.io/badge/Redux-61DAFB?style=for-the-badge&logo=redux&logoColor=#CA4245"/>
+<img src="https://img.shields.io/badge/ReactRouter-F7DF1E?style=for-the-badge&logo=redux&logoColor=#764ABC"/>
+<img src="https://img.shields.io/badge/javascript-red?style=for-the-badge&logo=javascript&logoColor=black"/>
+<img src="https://img.shields.io/badge/HTML5-008000?style=for-the-badge&logo=HTML5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/CSS3-blue?style=for-the-badge&logo=css3&logoColor=#1572B6"/>
+</div>
+<br>
 
-## Available Scripts
+- 항해99 8기 A반 6조 팀 미니프로젝트
+  - 권익현, 박용원
+- React.js, Middleware Thunk, Redux Toolkit, EC2서버와 직접 통시하는 항해99 주주총회 미니프로젝트 입니다.
+- 2022.08.12 ~ 2022.08.18
 
-In the project directory, you can run:
+## 주요기능
 
-### `yarn start`
+- 게시글 CRUD 구현
+  - 리스트 조회하기
+  - 본문 조회하기
+  - 본문 추가하기
+  - 본문 삭제하기
+  - 본문 수정하기
+- 댓글 CRUD 구현
+  - 댓글 조회하기
+  - 댓글 추가하기
+  - 댓글 삭제하기
+  - 댓글 수정하기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 라이브러리 🛠
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React.js
+- Redux/Toolkit
+- Styled Components
+- Router
+- axios
+- json-server
+- react-icons
+- Heroku
+- Vercel
+- Redux logger
+- Devtools
+- Boostrap
 
-### `yarn test`
+## 환경설정
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+- npm install --global yarn (yarn을 설치 안했을때)
+- yarn add styled-components
+- yarn add react-redux @reduxjs/toolkit
+- yarn add global json-server
+- yarn add cross-env
+- yarn add react-router-dom@6
+- yarn add axios
+- yarn add redux-logger
+- yarn add redux-devtools-extension
+- yarn add react-icons
+- yarn add bootstrap
+- yarn start
+```
 
-### `yarn build`
+##
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 메인페이지
+![Screen Shot 2022-08-18 at 6 45 25 PM](https://user-images.githubusercontent.com/26310384/185365184-3d60d6db-848d-40b6-a26f-46c513493d75.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 로그인 & 회원가입
+![Screen Shot 2022-08-18 at 6 45 41 PM](https://user-images.githubusercontent.com/26310384/185365253-de7407ec-d9b2-46ba-b864-ce6d4fddfdbd.png)
+![Screen Shot 2022-08-18 at 6 45 50 PM](https://user-images.githubusercontent.com/26310384/185365329-3a7b2fd4-a4e1-4f6f-b037-f7e871c71108.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Form Page
+![Screen Shot 2022-08-18 at 6 46 28 PM](https://user-images.githubusercontent.com/26310384/185365400-97f90de5-2ec2-4900-ac75-6b5fda4faa25.png)
 
-### `yarn eject`
+## 상세페이지
+![Screen Shot 2022-08-18 at 6 46 52 PM](https://user-images.githubusercontent.com/26310384/185365500-f78db5a7-c492-40e4-8ee3-898970626dd7.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 컴포넌트 구성
+![Screen Shot 2022-08-18 at 6 47 27 PM](https://user-images.githubusercontent.com/26310384/185365630-5bf6c899-711c-4415-9c5f-d0917a93947c.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
